@@ -16,6 +16,9 @@
         <a v-if="classMap.id === 4" href="https://konstantinbiryukov.github.io/last-of-us-map/" target="_blank">
           {{ classMap.id + ". " + classMap.name }}
         </a>
+        <router-link v-else-if="classMap.id === 2" to="/interactiveMap">
+          {{ classMap.id + ". " + classMap.name }}
+        </router-link>
         <router-link v-else :to="{name:'ClassDetails', params: {slug: classMap.slug}}">
           {{ classMap.id + ". " + classMap.name }}
         </router-link>
@@ -35,7 +38,8 @@ export default {
   // },
   data() {
     return {
-      classes: store.state.classes
+      classes: store.state.classes,
+      subclasses: store.state.classes[1].subclasses
     }
   }
 }

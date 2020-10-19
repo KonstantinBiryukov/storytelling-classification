@@ -1,23 +1,14 @@
 <template>
   <div class="home">
     <div class="classes">
-      <div v-for="classMap in classes" :key="classMap.id">
-        <a v-if="classMap.id === 4" href="https://konstantinbiryukov.github.io/last-of-us-map/" target="_blank">
+      <div v-for="classMap in subclasses" :key="classMap.id">
+        <router-link :to="{name: 'InteractiveMapDetails', params: {slug: classMap.slug}}">
           <h2>
-            {{ classMap.name }}
-          </h2>
-        </a>
-        <router-link v-else :to="{name: 'ClassDetails', params: {slug: classMap.slug}}">
-          <h2>
-            {{ classMap.name }}
+            {{ classMap.id + ". " + classMap.name }}
           </h2>
         </router-link>
         <figure>
-          <a v-if="classMap.id === 4" href="https://konstantinbiryukov.github.io/last-of-us-map/" target="_blank">
-            <img class="homepage-photo" :src="require(`@/assets/homepage-photos/${classMap.image}`)"
-                 :alt="classMap.name">
-          </a>
-          <router-link v-else :to="{name: 'ClassDetails', params: {slug: classMap.slug}}">
+          <router-link :to="{name: 'InteractiveMapDetails', params: {slug: classMap.slug}}">
             <img class="homepage-photo" :src="require(`@/assets/homepage-photos/${classMap.image}`)"
                  :alt="classMap.name">
           </router-link>
@@ -25,16 +16,19 @@
       </div>
     </div>
   </div>
+  <!--  <a v-if="classMap.id === 2" v-for="subclass in subclasses" :key="subclass.id" class="links">-->
+  <!--    {{ classMap.id + ". " + classMap.name }}-->
+  <!--  </a>-->
 </template>
 
 <script>
 import store from "@/store/store";
 
 export default {
-  name: "Home",
+  name: "InteractiveMapClassHome",
   data() {
     return {
-      classes: store.state.classes
+      subclasses: store.state.classes[1].subclasses
     }
   }
 }

@@ -5,15 +5,25 @@ const routes = [
     {
         path: "/", // url, the base url in this case
         name: "Home", // the name of the root
-        component: Home, // A component the name refers to. We reported it above.
-        props: true
-    },
+        component: Home // A component the name refers to. We reported it above.
+     },
     {
         path: "/class/:slug",
         name: "ClassDetails",
         component: () => import(/* webpackChunkName: "DestinationDetails" */ "../views/ClassDetails.vue"),
         props: true
-    }
+    },
+    {
+        path: "/interactiveMap", // url, the base url in this case
+        name: "InteractiveMapClassHome", // the name of the root
+        component: () => import(/* webpackChunkName: "DestinationDetails" */ "../views/InteractiveMapClassHome.vue"),
+    },
+    {
+        path: "/interactiveMap/:slug",
+        name: "InteractiveMapDetails",
+        component: () => import(/* webpackChunkName: "DestinationDetails" */ "../views/InteractiveMapDetails.vue"),
+        props: true
+    },
 ]
 
 const router = createRouter({
