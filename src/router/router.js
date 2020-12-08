@@ -8,22 +8,26 @@ const routes = [
         component: Home // A component the name refers to. We reported it above.
      },
     {
-        path: "/class/:slug",
-        name: "ClassDetails",
-        component: () => import(/* webpackChunkName: "DestinationDetails" */ "../views/ClassDetails.vue"),
+        path: "/class/onScroll",
+        name: "OnScrollClass",
+        component: () => import(/* webpackChunkName: "OnScrollClass" */ "../views/OnScrollClass.vue"),
         props: true
     },
     {
-        path: "/interactiveMap", // url, the base url in this case
+        path: "/class/interactiveMap", // url, the base url in this case
         name: "InteractiveMapClassHome", // the name of the root
-        component: () => import(/* webpackChunkName: "DestinationDetails" */ "../views/InteractiveMapClassHome.vue"),
+        component: () => import(/* webpackChunkName: "InteractiveMapClassHome" */ "../views/InteractiveMapClassHome.vue"),
     },
     {
-        path: "/interactiveMap/:slug",
-        name: "InteractiveMapDetails",
-        component: () => import(/* webpackChunkName: "DestinationDetails" */ "../views/InteractiveMapDetails.vue"),
-        props: true
+        path: "/class/interactiveMap/controlBySound",
+        name: "ControlBySound",
+        component: () => import(/* webpackChunkName: "ControlBySound" */ "../views/ControlBySound.vue"),
     },
+    {
+        path: "/class/interactiveMap/video",
+        name: "Video",
+        component: () => import(/* webpackChunkName: "ControlBySound" */ "../views/VideoClass.vue"),
+    }
 ]
 
 const router = createRouter({
@@ -44,3 +48,11 @@ const router = createRouter({
 });
 
 export default router;
+
+
+// {
+//     path: "/interactiveMap/:slug",
+//     name: "InteractiveMapDetails",
+//     component: () => import(/* webpackChunkName: "DestinationDetails" */ "../views/InteractiveMapDetails.vue"),
+//     props: true
+// },

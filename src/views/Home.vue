@@ -7,8 +7,10 @@
             {{ classMap.name }}
           </h2>
         </a>
-        <router-link v-else :to="{name: 'ClassDetails', params: {slug: classMap.slug}}">
-          <h2>
+<!--        <router-link v-else :to="{name: 'ClassDetails', params: {slug: classMap.slug}}">-->
+        <router-link v-else :to="classMap.routePath">
+
+        <h2>
             {{ classMap.name }}
           </h2>
         </router-link>
@@ -17,8 +19,9 @@
             <img class="homepage-photo" :src="require(`@/assets/homepage-photos/${classMap.image}`)"
                  :alt="classMap.name">
           </a>
-          <router-link v-else :to="{name: 'ClassDetails', params: {slug: classMap.slug}}">
-            <img class="homepage-photo" :src="require(`@/assets/homepage-photos/${classMap.image}`)"
+<!--          <router-link v-else :to="{name: 'ClassDetails', params: {slug: classMap.slug}}">-->
+          <router-link v-else :to="classMap.routePath">
+          <img class="homepage-photo" :src="require(`@/assets/homepage-photos/${classMap.image}`)"
                  :alt="classMap.name">
           </router-link>
         </figure>

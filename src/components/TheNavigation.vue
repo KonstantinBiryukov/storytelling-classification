@@ -16,12 +16,19 @@
         <a v-if="classMap.id === 4" href="https://konstantinbiryukov.github.io/last-of-us-map/" target="_blank">
           {{ classMap.id + ". " + classMap.name }}
         </a>
-        <router-link v-else-if="classMap.id === 2" to="/interactiveMap">
+        <router-link v-else :to="classMap.routePath">
           {{ classMap.id + ". " + classMap.name }}
         </router-link>
-        <router-link v-else :to="{name:'ClassDetails', params: {slug: classMap.slug}}">
-          {{ classMap.id + ". " + classMap.name }}
-        </router-link>
+
+        <!--        <router-link v-else-if="classMap.id === 2" to="/class/interactiveMap">-->
+<!--          {{ classMap.id + ". " + classMap.name }}-->
+<!--        </router-link>-->
+<!--        <router-link v-else-if="classMap.id === 1" to="/class/onScroll">-->
+<!--          {{ classMap.id + ". " + classMap.name }}-->
+<!--        </router-link>-->
+<!--        <router-link v-else :to="{name:'ClassDetails', params: {slug: classMap.slug}}">-->
+<!--          {{ classMap.id + ". " + classMap.name }}-->
+<!--        </router-link>-->
       </li>
     </ul>
   </nav>
@@ -30,12 +37,13 @@
 <script>
 // import Class from './Class.vue'
 import store from '@/store/store';
+// import onScroll from "@/views/OnScrollClass";
 
 export default {
   name: 'MainPage',
-  // components: {
-  //   Class
-  // },
+  components: {
+    // Class
+  },
   data() {
     return {
       classes: store.state.classes,

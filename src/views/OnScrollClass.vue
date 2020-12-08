@@ -81,22 +81,21 @@ import store from "../store/store"
 
 export default {
   name: "OnScrollClass",
+  data: function () {
+    return {
+      style: "mapbox://styles/mapbox/streets-v11"
+    }
+  },
   computed: {
     map() {
-      return store.getters.createMap("map");
+      return store.getters.createMap("map", 27, 45, 0, [-94.1666716, 45.5558578], this.style);
     }
   },
   mounted() {
     // set up bounds and center
-    // const bounds = [
-    //   [-126.5, 24.5], // [west, south]
-    //   [-65.5, 49.5]  // [east, north]
-    // ];
     const center = [-94.1666716, 45.5558578];
-    const zoom = 10;
+    const zoom = 12;
     let map = this.map;
-    // this.map.setMaxBounds(bounds);
-    // this.map.setCenter(center);
 
     this.map.flyTo({
       'center': center,
@@ -165,8 +164,10 @@ export default {
 
     function isElementOnScreen(id) {
       var element = document.getElementById(id);
-      var bounds = element.getBoundingClientRect();
-      return bounds.top < window.innerHeight && bounds.bottom > 300;
+      if (element !== null) {
+        var bounds = element.getBoundingClientRect();
+        return bounds.top < window.innerHeight && bounds.bottom > 300;
+      }
     }
 
     document.getElementById("onscroll-class").style.overflow = 'hidden'
