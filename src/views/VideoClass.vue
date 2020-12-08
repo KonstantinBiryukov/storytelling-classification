@@ -22,14 +22,15 @@ export default {
           'video': {
             'type': 'video',
             'urls': [
-              'https://static-assets.mapbox.com/mapbox-gl-js/drone.mp4',
-              'https://static-assets.mapbox.com/mapbox-gl-js/drone.webm'
+                'https://www.dropbox.com/home/doc?preview=videoClassCompressed+(1).mp4'
+              // 'https://player.vimeo.com/video/385796955?title=0&portrait=0&byline=0&autoplay=1',
+              // 'https://player.vimeo.com/video/385796955?title=0&portrait=0&byline=0&autoplay=1'
             ],
             'coordinates': [
-              [-121.3004577, 45.6823342],
-              [-121.3004577, 45.6823345],
-              [-121.3004577, 45.6823347],
-              [-121.3004577, 45.6823340]
+              [-121.3006387, 45.68348],
+              [-121.2982062, 45.6832854],
+              [-121.2983605, 45.6820319],
+              [-121.3010827, 45.6821999]
             ]
           }
         },
