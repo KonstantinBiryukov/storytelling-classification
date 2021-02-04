@@ -7,11 +7,12 @@
 
 <script>
 import TheNavigation from '@/components/TheNavigation.vue'
-
+// import RealTimeRouteRender from '@/views/RealTimeRouteRender.vue'
 export default {
   name: 'App',
   components: {
-    TheNavigation
+    TheNavigation,
+    // RealTimeRouteRender
   }
 }
 </script>

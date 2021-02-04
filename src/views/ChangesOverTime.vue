@@ -1,69 +1,133 @@
-<!--<template>-->
-<!--  &lt;!&ndash;  <div class="swipe-maps">&ndash;&gt;-->
-<!--  &lt;!&ndash;    <script type="application/javascript" src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.js"></script>&ndash;&gt;-->
-<!--  &lt;!&ndash;    <link&ndash;&gt;-->
-<!--  &lt;!&ndash;        rel="stylesheet"&ndash;&gt;-->
-<!--  &lt;!&ndash;        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css"&ndash;&gt;-->
-<!--  &lt;!&ndash;        type="text/css"&ndash;&gt;-->
-<!--  &lt;!&ndash;    />&ndash;&gt;-->
-<!--  <div id="comparison-container">-->
-<!--    <div id="before" class="map"></div>-->
-<!--    <div id="after" class="map"></div>-->
-<!--  </div>-->
-<!--  &lt;!&ndash;  </div>&ndash;&gt;-->
-<!--</template>-->
-
-<!--<script>-->
-<!--import store from "@/store/store";-->
-
-<!--export default {-->
-<!--  name: "ChangesOverTime",-->
-<!--  computed: {-->
-<!--    beforeMap() {-->
-<!--      return store.getters.createMap("before", 0, 0);-->
-<!--    },-->
-<!--    afterMap() {-->
-<!--      return store.getters.createMap("after", 0, 0);-->
-<!--    }-->
-<!--  },-->
-<!--  mounted() {-->
-<!--    const center = [0, 0];-->
-<!--    const zoom = 0;-->
-<!--    this.beforeMap.center = center;-->
-<!--    this.beforeMap.zoom = zoom;-->
-<!--    this.afterMap.center = center;-->
-<!--    this.afterMap.zoom = zoom;-->
-
-<!--    let container = '#comparison-container';-->
-
-<!--    new store.state.mapboxgl.Compare(this.beforeMap, this.afterMap, container, {-->
-<!--// Set this to enable comparing two maps by mouse movement:-->
-<!--//       mousemove: true-->
-<!--    });-->
+<template>
+  <div class="change-over-time-container">
+    <div id="map">
+<!--      <img id="map-stcloud" :src="require('../assets/StCloudMap.png')"/>-->
+    </div>
+    <div class="map-overlay top">
+      <div class="map-overlay-inner">
+        <label>Layer opacity: <span id="slider-value">100%</span></label>
+        <input
+            id="slider"
+            type="range"
+            min="0"
+            max="100"
+            step="0"
+            value="100"
+        />
+      </div>
+    </div>
+  </div>
+</template>
 
 
-<!--  }-->
-<!--}-->
-<!--</script>-->
+<script>
+import store from "@/store/store";
+// import image from "src/assets/StCloudMap.png";
 
-<!--<style scoped>-->
-<!--body {-->
-<!--  overflow: hidden;-->
-<!--}-->
+export default {
+  name: "ChangeOverTime",
+  data: function () {
+    return {
+      style: "mapbox://styles/mapbox/light-v10",
+      // image: image
+    }
+  },
+  computed: {
+    map() {
+      return store.getters.createMap("map", 0, 0, 9.5,
+          [-87.6321, 41.8362], this.style, 9.5
+      );
+    }
+  },
+  mounted() {
+    let map = this.map;
+    let slider = document.getElementById('slider');
+    let sliderValue = document.getElementById('slider-value');
 
-<!--body * {-->
-<!--  -webkit-touch-callout: none;-->
-<!--  -webkit-user-select: none;-->
-<!--  -moz-user-select: none;-->
-<!--  -ms-user-select: none;-->
-<!--  user-select: none;-->
-<!--}-->
+    map.on('load', function () {
+      map.addSource('chicago', {
+        'type': 'raster',
+        // 'url': 'mapbox://mapbox.u8yyzaor',
+        'url' : 'public/routes.js'
+      });
 
-<!--.map {-->
-<!--  position: absolute;-->
-<!--  top: 0;-->
-<!--  bottom: 0;-->
-<!--  width: 100%;-->
-<!--}-->
+      map.addLayer({
+        'id': 'chicago',
+        'source': 'chicago',
+        'type': 'raster'
+      });
 
-<!--</style>-->
+      slider.addEventListener('input', function (e) {
+        // Adjust the layers opacity. layer here is arbitrary - this could
+        // be another layer name found in your style or a custom layer
+        // added on the fly using `addSource`.
+        map.setPaintProperty(
+            'chicago',
+            // 'map-stcloud',
+            'raster-opacity',
+            parseInt(e.target.value, 10) / 100
+        );
+
+        // Value indicator
+        sliderValue.textContent = e.target.value + '%';
+      });
+    });
+  }
+}
+</script>
+
+<style scoped>
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  position: fixed;
+  width: 99%;
+  top: 20%;
+  bottom: 1%;
+}
+
+.map-overlay {
+  font: bold 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  /*position: absolute;*/
+  position: fixed;
+  width: 25%;
+  /*top: 0;*/
+  top: 20%;
+  bottom: 1%;
+  left: 0;
+  padding: 10px;
+}
+
+.map-overlay .map-overlay-inner {
+  background-color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.map-overlay label {
+  display: block;
+  margin: 0 0 10px;
+}
+
+.map-overlay input {
+  background-color: transparent;
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  margin: 0;
+  cursor: ew-resize;
+}
+
+#map-stcloud {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  z-index: 1;
+}
+</style>

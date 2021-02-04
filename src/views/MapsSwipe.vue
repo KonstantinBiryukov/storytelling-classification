@@ -1,0 +1,145 @@
+<template>
+  <div id="comparison-container">
+    <div id="before" class="map"></div>
+    <div id="after" class="map"></div>
+  </div>
+</template>
+
+<script>
+// const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+import store from "@/store/store";
+import mapboxgl from "mapbox-gl";
+// import * as Compare from 'mapbox-gl-compare';
+mapboxgl.accessToken = "pk.eyJ1Ijoia29uc3RhbnRpbmJpcml1a292IiwiYSI6ImNrMWsxYjc1bjBrdjQzZHBiNTlhbjBqdmwifQ.vAlGhe7KTCajh5VvGfMJow";
+
+export default {
+  name: "MapsSwipe",
+  data: function () {
+    return {
+      styleBefore: "mapbox://styles/mapbox/light-v10",
+      styleAfter: 'mapbox://styles/mapbox/dark-v10'
+    }
+  },
+  methods: {
+    beforeMap () {
+      return store.getters.createMap("map", 0, 0, 0,
+          [0, 0], this.styleBefore, 0, false
+      );
+    },
+    afterMap() {
+      return store.getters.createMap("map", 0, 0, 0,
+          [0, 0], this.styleAfter, 0, false
+      );
+    }
+  },
+  mounted() {
+    // const mapboxgl = store.state.mapboxgl;
+    // const mapboxgl = store.state;
+    // A selector or reference to HTML element
+    const container = '#comparison-container';
+
+    // let map = new mapboxgl.Compare(this.beforeMap, this.afterMap, container, {
+    let map = new mapboxgl.Compare(store.getters.beforeMap, store.getters.afterMap, container, {
+      // Set this to enable comparing two maps by mouse movement:
+      // mousemove: true
+    });
+    console.log(map);
+  }
+}
+</script>
+
+<style scoped>
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.map {
+  position: fixed;
+  width: 99%;
+  top: 20%;
+  bottom: 1%;
+}
+</style>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--  <meta charset="utf-8" />-->
+<!--  <title>Swipe between maps</title>-->
+<!--  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />-->
+<!--  <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>-->
+<!--  <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />-->
+<!--  <style>-->
+<!--    body { margin: 0; padding: 0; }-->
+<!--    #map { position: absolute; top: 0; bottom: 0; width: 100%; }-->
+<!--  </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<style>-->
+<!--  body {-->
+<!--    overflow: hidden;-->
+<!--  }-->
+
+<!--  body * {-->
+<!--    -webkit-touch-callout: none;-->
+<!--    -webkit-user-select: none;-->
+<!--    -moz-user-select: none;-->
+<!--    -ms-user-select: none;-->
+<!--    user-select: none;-->
+<!--  }-->
+
+<!--  /*.map {*/-->
+<!--  /*  position: absolute;*/-->
+<!--  /*  top: 0;*/-->
+<!--  /*  bottom: 0;*/-->
+<!--  /*  width: 100%;*/-->
+<!--  /*}*/-->
+
+
+<!--  .map {-->
+<!--    position: fixed;-->
+<!--    width: 99%;-->
+<!--    top: 20%;-->
+<!--    bottom: 1%;-->
+<!--  }-->
+
+<!--</style>-->
+<!--<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.js"></script>-->
+<!--<link-->
+<!--    rel="stylesheet"-->
+<!--    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css"-->
+<!--    type="text/css"-->
+<!--/>-->
+<!--<div id="comparison-container">-->
+<!--  <div id="before" class="map"></div>-->
+<!--  <div id="after" class="map"></div>-->
+<!--</div>-->
+<!--<script>-->
+<!--  mapboxgl.accessToken = 'pk.eyJ1Ijoia29uc3RhbnRpbmJpcml1a292IiwiYSI6ImNrMWsxYjc1bjBrdjQzZHBiNTlhbjBqdmwifQ.vAlGhe7KTCajh5VvGfMJow';-->
+<!--  var beforeMap = new mapboxgl.Map({-->
+<!--    container: 'before',-->
+<!--    style: 'mapbox://styles/mapbox/light-v10',-->
+<!--    center: [0, 0],-->
+<!--    zoom: 0-->
+<!--  });-->
+
+<!--  var afterMap = new mapboxgl.Map({-->
+<!--    container: 'after',-->
+<!--    style: 'mapbox://styles/mapbox/dark-v10',-->
+<!--    center: [0, 0],-->
+<!--    zoom: 0-->
+<!--  });-->
+
+<!--  // A selector or reference to HTML element-->
+<!--  var container = '#comparison-container';-->
+
+<!--  var map = new mapboxgl.Compare(beforeMap, afterMap, container, {-->
+<!--    // Set this to enable comparing two maps by mouse movement:-->
+<!--    // mousemove: true-->
+<!--  });-->
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->

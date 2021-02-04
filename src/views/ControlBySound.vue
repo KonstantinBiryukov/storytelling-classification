@@ -6,6 +6,7 @@
 
 <script>
 import store from "@/store/store";
+import mapboxgl from "mapbox-gl";
 
 export default {
   name: "ControlBySound",
@@ -18,34 +19,24 @@ export default {
     map() {
       return store.getters.createMap("map", 0, 55, 15,
           [-74.00649562332922, 40.70811328605049], this.style, 12
-         );
-      // options: {"antialias": true}
-    },
-    // mapboxgl() {
-    //   return store.state.mapboxgl;
-    // }
+      );
+    }
   },
   mounted() {
-    // const center = [-74.00649562332922, 40.70811328605049];
-    // const zoom = 15;
     let map = this.map;
-    // let mapboxgl = map.mapboxgl();
 
     this.map.flyTo({
-      // "center": center,
-      // "zoom": zoom,
       "antialias": true
     });
 
-    // map.addControl(new mapboxgl.FullscreenControl());
 
     map.on('load', function () {
-      var bins = 16;
-      var maxHeight = 200;
-      var binWidth = maxHeight / bins;
+      const maxHeight = 200;
+      let bins = 16;
+      let binWidth = maxHeight / bins;
 
-// Divide the buildings into 16 bins based on their true height, using a layer filter.
-      for (var i = 0; i < bins; i++) {
+      // Divide the buildings into 16 bins based on their true height, using a layer filter.
+      for (let i = 0; i < bins; i++) {
         map.addLayer({
           'id': '3d-buildings-' + i,
           'source': 'composite',
@@ -69,22 +60,21 @@ export default {
         });
       }
 
-// Older browsers might not implement mediaDevices at all, so we set an empty object first
+      // Older browsers might not implement mediaDevices at all, so we set an empty object first
       if (navigator.mediaDevices === undefined) {
         navigator.mediaDevices = {};
       }
 
-// Some browsers partially implement mediaDevices. We can't just assign an object
-// with getUserMedia as it would overwrite existing properties.
-// Here, we will just add the getUserMedia property if it's missing.
+      // Some browsers partially implement mediaDevices. We can't just assign an object
+      // with getUserMedia as it would overwrite existing properties.
+      // Here, we will just add the getUserMedia property if it's missing.
       if (navigator.mediaDevices.getUserMedia === undefined) {
         navigator.mediaDevices.getUserMedia = function (constraints) {
-// First get ahold of the legacy getUserMedia, if present
-          var getUserMedia =
-              navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+          // First hold of the legacy getUserMedia, if present
+          let getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-// Some browsers just don't implement it - return a rejected promise with an error
-// to keep a consistent interface
+          // Some browsers just don't implement it - return a rejected promise with an error
+          // to keep a consistent interface
           if (!getUserMedia) {
             return Promise.reject(
                 new Error(
@@ -93,7 +83,7 @@ export default {
             );
           }
 
-// Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
+          // Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
           return new Promise(function (resolve, reject) {
             getUserMedia.call(navigator, constraints, resolve, reject);
           });
@@ -103,29 +93,29 @@ export default {
       navigator.mediaDevices
           .getUserMedia({audio: true})
           .then(function (stream) {
-// Set up a Web Audio AudioContext and AnalyzerNode, configured to return the
-// same number of bins of audio frequency data.
-            var audioCtx = new (window.AudioContext ||
+            // Set up a Web Audio AudioContext and AnalyzerNode, configured to return the
+            // same number of bins of audio frequency data.
+            let audioCtx = new (window.AudioContext ||
                 window.webkitAudioContext)();
 
-            var analyser = audioCtx.createAnalyser();
+            let analyser = audioCtx.createAnalyser();
             analyser.minDecibels = -90;
             analyser.maxDecibels = -10;
             analyser.smoothingTimeConstant = 0.85;
 
-            var source = audioCtx.createMediaStreamSource(stream);
+            let source = audioCtx.createMediaStreamSource(stream);
             source.connect(analyser);
 
             analyser.fftSize = bins * 2;
 
-            var dataArray = new Uint8Array(bins);
+            let dataArray = new Uint8Array(bins);
 
             function draw(now) {
               analyser.getByteFrequencyData(dataArray);
 
-// Use that data to drive updates to the fill-extrusion-height property.
-              var avg = 0;
-              for (var i = 0; i < bins; i++) {
+            // Use that data to drive updates to the fill-extrusion-height property.
+              let avg = 0;
+              for (let i = 0; i < bins; i++) {
                 avg += dataArray[i];
                 map.setPaintProperty(
                     '3d-buildings-' + i,
@@ -135,8 +125,8 @@ export default {
               }
               avg /= bins;
 
-// Animate the map bearing and light color over time, and make the light more
-// intense when the audio is louder.
+              // Animate the map bearing and light color over time, and make the light more
+              // intense when the audio is louder.
               map.setBearing(now / 500);
               map.setLight({
                 color:
@@ -158,6 +148,8 @@ export default {
           });
     });
 
+    // fullScreen mode
+    map.addControl(new mapboxgl.FullscreenControl());
   }
 }
 </script>
@@ -168,25 +160,10 @@ body {
   padding: 0;
 }
 
-/*#map {*/
-/*  position: absolute;*/
-/*  top: 0;*/
-/*  bottom: 0;*/
-/*  width: 85%;*/
-/*}*/
-
 #map {
   position: fixed;
   width: 99%;
   top: 20%;
-  /*bottom: 0;*/
   bottom: 1%;
 }
-
-/*#map {*/
-/*  position: fixed;*/
-/*  width: 50%;*/
-/*  top: 20%;*/
-/*  bottom: 0;*/
-/*}*/
 </style>

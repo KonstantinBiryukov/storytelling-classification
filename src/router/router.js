@@ -8,15 +8,15 @@ const routes = [
         component: Home // A component the name refers to. We reported it above.
      },
     {
+        path: "/class/interactiveMap", // url, the base url in this case
+        name: "InteractiveMapClassHome", // the name of the root
+        component: () => import(/* webpackChunkName: "InteractiveMapClassHome" */ "../views/InteractiveMapClassHome.vue"),
+    },
+    {
         path: "/class/onScroll",
         name: "OnScrollClass",
         component: () => import(/* webpackChunkName: "OnScrollClass" */ "../views/OnScrollClass.vue"),
         props: true
-    },
-    {
-        path: "/class/interactiveMap", // url, the base url in this case
-        name: "InteractiveMapClassHome", // the name of the root
-        component: () => import(/* webpackChunkName: "InteractiveMapClassHome" */ "../views/InteractiveMapClassHome.vue"),
     },
     {
         path: "/class/interactiveMap/controlBySound",
@@ -27,7 +27,38 @@ const routes = [
         path: "/class/interactiveMap/video",
         name: "Video",
         component: () => import(/* webpackChunkName: "ControlBySound" */ "../views/VideoClass.vue"),
-    }
+    },
+    {
+        path: "/class/interactiveMap/changesOverTime",
+        name: "ChangesOverTime",
+        component: () => import(/* webpackChunkName: "ChangeOverTime" */ "../views/ChangesOverTime.vue"),
+    },
+    {
+        path: "/class/interactiveMap/animation",
+        name: "Animation",
+        component: () => import(/* webpackChunkName: "Animation" */ "../views/Animation.vue"),
+    },
+    {
+        path: "/class/interactiveMap/pathFollow",
+        name: "PathFollow",
+        component: () => import(/* webpackChunkName: "PathFollow" */ "../views/PathFollow.vue"),
+    },
+    {
+        path: "/class/interactiveMap/RealTimeRouteRender",
+        name: "RealTimeRouteRender",
+        component: () => import(/* webpackChunkName: "RealTimeRouteRender" */ "../views/RealTimeRouteRender.vue"),
+    },
+    {
+        path: "/class/interactiveMap/MapsSwipe",
+        name: "MapsSwipe",
+        component: () => import(/* webpackChunkName: "MapsSwipe" */ "../views/MapsSwipe.vue"),
+    },
+    {
+        path: "/class/interactiveMap/3dPolygons",
+        name: "3dPolygons",
+        component: () => import(/* webpackChunkName: "3dPolygons" */ "../views/3dPolygons.vue"),
+    },
+
 ]
 
 const router = createRouter({

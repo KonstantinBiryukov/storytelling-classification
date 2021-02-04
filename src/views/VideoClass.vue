@@ -1,6 +1,7 @@
 <template>
-  <div class="sound-control-container">
-    <div id="map"></div>
+  <div class="video-map-container">
+    <div id="map">
+    </div>
   </div>
 </template>
 
@@ -22,9 +23,7 @@ export default {
           'video': {
             'type': 'video',
             'urls': [
-                'https://www.dropbox.com/home/doc?preview=videoClassCompressed+(1).mp4'
-              // 'https://player.vimeo.com/video/385796955?title=0&portrait=0&byline=0&autoplay=1',
-              // 'https://player.vimeo.com/video/385796955?title=0&portrait=0&byline=0&autoplay=1'
+              "https://streamable.com/e/bkadcw?autoplay=1&nocontrols=1"
             ],
             'coordinates': [
               [-121.3006387, 45.68348],
@@ -60,7 +59,7 @@ export default {
     map() {
       return store.getters.createMap("map", -96, 0, 17,
           [-121.3004577, 45.6823341], this.style, 14
-      ); // [{minZoom: 14}]
+      );
     },
   },
   mounted() {
@@ -83,25 +82,11 @@ body {
   padding: 0;
 }
 
-/*#map {*/
-/*  position: absolute;*/
-/*  top: 0;*/
-/*  bottom: 0;*/
-/*  width: 85%;*/
-/*}*/
-
 #map {
   position: fixed;
   width: 99%;
   top: 20%;
-  /*bottom: 0;*/
   bottom: 1%;
 }
 
-/*#map {*/
-/*  position: fixed;*/
-/*  width: 50%;*/
-/*  top: 20%;*/
-/*  bottom: 0;*/
-/*}*/
 </style>
