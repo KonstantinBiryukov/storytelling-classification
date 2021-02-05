@@ -9,7 +9,6 @@
 // const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 import store from "@/store/store";
 import mapboxgl from "mapbox-gl";
-// import * as Compare from 'mapbox-gl-compare';
 mapboxgl.accessToken = "pk.eyJ1Ijoia29uc3RhbnRpbmJpcml1a292IiwiYSI6ImNrMWsxYjc1bjBrdjQzZHBiNTlhbjBqdmwifQ.vAlGhe7KTCajh5VvGfMJow";
 
 export default {

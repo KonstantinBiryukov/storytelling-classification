@@ -46,9 +46,15 @@ export default {
 
     map.on('load', function () {
       map.addSource('chicago', {
-        'type': 'raster',
+        'type': 'image',
+        'url': 'https://konstantinbiryukov.github.io/storytellingmaps-media/StCloudMap.png',
         // 'url': 'mapbox://mapbox.u8yyzaor',
-        'url' : 'public/routes.js'
+        'coordinates' : [
+            [41.93364304130842, -87.78871701147162],
+            [42.02699927016955, -87.51501644417941],
+            [41.72535158392222, -87.46557796781107],
+            [41.768087789171894, -87.98246006483011]
+        ]
       });
 
       map.addLayer({
@@ -63,7 +69,6 @@ export default {
         // added on the fly using `addSource`.
         map.setPaintProperty(
             'chicago',
-            // 'map-stcloud',
             'raster-opacity',
             parseInt(e.target.value, 10) / 100
         );

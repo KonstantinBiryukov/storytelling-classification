@@ -6,16 +6,26 @@ const routes = [
         path: "/", // url, the base url in this case
         name: "Home", // the name of the root
         component: Home // A component the name refers to. We reported it above.
-     },
+    },
     {
         path: "/class/interactiveMap", // url, the base url in this case
-        name: "InteractiveMapClassHome", // the name of the root
-        component: () => import(/* webpackChunkName: "InteractiveMapClassHome" */ "../views/InteractiveMapClassHome.vue"),
+        name: "InteractiveMapClassHomeComponent", // the name of the root
+        component: () => import(/* webpackChunkName: "InteractiveMapClassHome" */ "../components/InteractiveMapClassHomeComponent"),
+    },
+    {
+        path: "/class/pathVisualization", // url, the base url in this case
+        name: "PathVisualizationHomeComponent", // the name of the root
+        component: () => import(/* webpackChunkName: "InteractiveMapClassHome" */ "../components/PathVisualizationHomeComponent.vue"),
+    },
+    {
+        path: "/class/interactiveMap/flyToLocation",
+        name: "FlyToLocation",
+        component: () => import(/* webpackChunkName: "FlyToLocation" */ "../views/FlyToLocation.vue"),
     },
     {
         path: "/class/onScroll",
         name: "OnScrollClass",
-        component: () => import(/* webpackChunkName: "OnScrollClass" */ "../views/OnScrollClass.vue"),
+        component: () => import(/* webpackChunkName: "OnScrollClass" */ "../views/OnScroll.vue"),
         props: true
     },
     {
@@ -39,11 +49,6 @@ const routes = [
         component: () => import(/* webpackChunkName: "Animation" */ "../views/Animation.vue"),
     },
     {
-        path: "/class/interactiveMap/pathFollow",
-        name: "PathFollow",
-        component: () => import(/* webpackChunkName: "PathFollow" */ "../views/PathFollow.vue"),
-    },
-    {
         path: "/class/interactiveMap/RealTimeRouteRender",
         name: "RealTimeRouteRender",
         component: () => import(/* webpackChunkName: "RealTimeRouteRender" */ "../views/RealTimeRouteRender.vue"),
@@ -58,7 +63,11 @@ const routes = [
         name: "3dPolygons",
         component: () => import(/* webpackChunkName: "3dPolygons" */ "../views/3dPolygons.vue"),
     },
-
+    {
+        path: "/class/pathVisualization/pathFollow",
+        name: "PathFollow",
+        component: () => import(/* webpackChunkName: "PathFollow" */ "../views/PathFollow.vue"),
+    },
 ]
 
 const router = createRouter({

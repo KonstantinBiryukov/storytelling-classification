@@ -19,31 +19,16 @@
         <router-link v-else :to="classMap.routePath">
           {{ classMap.id + ". " + classMap.name }}
         </router-link>
-
-        <!--        <router-link v-else-if="classMap.id === 2" to="/class/interactiveMap">-->
-<!--          {{ classMap.id + ". " + classMap.name }}-->
-<!--        </router-link>-->
-<!--        <router-link v-else-if="classMap.id === 1" to="/class/onScroll">-->
-<!--          {{ classMap.id + ". " + classMap.name }}-->
-<!--        </router-link>-->
-<!--        <router-link v-else :to="{name:'ClassDetails', params: {slug: classMap.slug}}">-->
-<!--          {{ classMap.id + ". " + classMap.name }}-->
-<!--        </router-link>-->
       </li>
     </ul>
   </nav>
 </template>
 
 <script>
-// import Class from './Class.vue'
 import store from '@/store/store';
-// import onScroll from "@/views/OnScrollClass";
 
 export default {
   name: 'MainPage',
-  components: {
-    // Class
-  },
   data() {
     return {
       classes: store.state.classes,
@@ -72,11 +57,6 @@ export default {
   font-weight: bold;
 }
 
-/*#nav a.router-link-exact-active {*/
-#nav a.vue-school-active-class {
-  color: purple;
-}
-
 .nav-links {
   display: flex;
 }
@@ -97,8 +77,6 @@ export default {
 }
 
 h2 {
-  /*width:20%;*/
-  /*margin:5% auto;*/
   border-radius: 255px 10px 225px 15px/15px 225px 15px 255px;
   padding: 0.5em;
   line-height: 1.5em;

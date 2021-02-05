@@ -3,41 +3,10 @@
 </template>
 
 <script>
-// import mapboxgl from "mapbox-gl";
 import store from "@/store/store";
-// import * as d3 from 'd3';
 
 export default {
   name: "RealTimeRouteRender",
-  data: function () {
-    return {
-      // style: "mapbox://styles/mapbox/satellite-v9"
-      // center: [-93.1247, 44.9323], // St. Paul
-      // zoom: 10.5
-    }
-  },
-  computed: {
-    // map() {
-    //   return store.getters.createMap("map", 0, 55, 15,
-    //       [-122.019807, 45.632433], this.style, 12
-    //   );
-    // }
-  },
-  // methods: {
-  //   createMap() {
-  //     // instantiate map.  this method runs once after the vue component is mounted to the dom
-  //     this.map = new mapboxgl.Map({
-  //       accessToken:
-  //           "pk.eyJ1IjoiYmZyaWVkbHkiLCJhIjoiY2p4bHd1OXdpMGFycDN0bzFiNWR4d2VyNyJ9.3hQjvgyoPoCuRx-Hqr_BFQ",
-  //       container: "map",
-  //       style: "mapbox://styles/mapbox/streets-v11",
-  //       minzoom: 5,
-  //       center: this.center, // use initial data as default
-  //       zoom: this.zoom,
-  //       hash: true // sets url's hash to #zoom/lat/lng
-  //     });
-  //   }
-  // },
   mounted() {
     let map = store.getters.d3Map();
     map.on('load', function () {
@@ -46,7 +15,6 @@ export default {
 // or otherwise) that you want.
       //   Important!  "d3": "^3.5.17" is used. d3.json() function in newer version has different syntax.
       store.state.d3.json(
-          // "public/hike.geojson",
           'https://docs.mapbox.com/mapbox-gl-js/assets/hike.geojson',
           function (err, data) {
             if (err) throw err;
@@ -108,10 +76,4 @@ body {
   bottom: 1%;
 }
 
-/*#map {*/
-/*  position: absolute;*/
-/*  top: 0;*/
-/*  bottom: 0;*/
-/*  width: 100%;*/
-/*}*/
 </style>

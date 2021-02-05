@@ -2,14 +2,12 @@
   <div class="home">
     <div class="classes">
       <div v-for="classMap in subclasses" :key="classMap.id">
-<!--        <router-link :to="{name: 'InteractiveMapDetails', params: {slug: classMap.slug}}">-->
           <router-link :to="classMap.routePath">
           <h2>
             {{ classMap.id + ". " + classMap.name }}
           </h2>
         </router-link>
         <figure>
-<!--          <router-link :to="{name: 'InteractiveMapDetails', params: {slug: classMap.slug}}">-->
           <router-link :to="classMap.routePath">
           <img class="homepage-photo" :src="require(`@/assets/homepage-photos/${classMap.image}`)"
                  :alt="classMap.name">
@@ -18,9 +16,6 @@
       </div>
     </div>
   </div>
-  <!--  <a v-if="classMap.id === 2" v-for="subclass in subclasses" :key="subclass.id" class="links">-->
-  <!--    {{ classMap.id + ". " + classMap.name }}-->
-  <!--  </a>-->
 </template>
 
 <script>
@@ -30,7 +25,7 @@ export default {
   name: "InteractiveMapClassHome",
   data() {
     return {
-      subclasses: store.state.classes[1].subclasses
+      subclasses: store.state.classes[2].subclasses
     }
   }
 }
@@ -42,6 +37,7 @@ export default {
   margin: 0 auto;
   top: 20%;
   position: absolute;
+
 }
 
 img {

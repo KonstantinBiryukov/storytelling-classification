@@ -2,8 +2,6 @@ import {createStore} from 'vuex'
 import {createApp} from 'vue'
 
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
-// import * as d3 from 'd3/dist/d3.min';
-// const d3 = require('d3');
 import * as d3 from "d3";
 
 const token = 'pk.eyJ1Ijoia29uc3RhbnRpbmJpcml1a292IiwiYSI6ImNrMWsxYjc1bjBrdjQzZHBiNTlhbjBqdmwifQ.vAlGhe7KTCajh5VvGfMJow';
@@ -34,19 +32,19 @@ const store = createStore({
                 subclasses: [
                     {
                         id: 2.1,
-                        name: "Slideshow",
-                        slug: "slideshow",
+                        name: "Fly to a Location",
+                        slug: "FlyTo",
                         image: "logo.png",
-                        description: "test2",
-                        component: "OnScrollClass",
-                        routePath: "asd"
+                        description: "https://docs.mapbox.com/mapbox-gl-js/example/flyto/",
+                        component: "FlyToLocation",
+                        routePath: "/class/interactiveMap/flyToLocation"
                     },
                     {
                         id: 2.2,
                         name: "Changes over time",
                         slug: "changes",
                         image: "logo.png",
-                        description: "test2",
+                        description: "https://docs.mapbox.com/mapbox-gl-js/example/adjust-layer-opacity/",
                         component: "ChangesOverTime",
                         routePath: "/class/interactiveMap/changesOverTime"
                     },
@@ -64,7 +62,7 @@ const store = createStore({
                         name: "Video",
                         slug: "video",
                         image: "logo.png",
-                        description: "test2",
+                        description: "https://docs.mapbox.com/mapbox-gl-js/example/video-on-a-map/",
                         component: "VideoClass",
                         routePath: "/class/interactiveMap/video"
                     },
@@ -79,15 +77,6 @@ const store = createStore({
                     },
                     {
                         id: 2.6,
-                        name: "Path following",
-                        slug: "PathFollowing",
-                        image: "logo.png",
-                        description: "https://docs.mapbox.com/mapbox-gl-js/example/free-camera-path/",
-                        component: "PathFollow",
-                        routePath: "/class/interactiveMap/pathFollow"
-                    },
-                    {
-                        id: 2.7,
                         name: "Swipe between maps",
                         slug: "MapsSwipe",
                         image: "logo.png",
@@ -96,20 +85,13 @@ const store = createStore({
                         routePath: "/class/interactiveMap/mapsSwipe"
                     },
                     {
-                        id: 2.8,
-                        name: "Real-time route render",
-                        slug: "RouteRender",
-                        image: "logo.png",
-                        description: "https://docs.mapbox.com/mapbox-gl-js/example/live-update-feature/",
-                        component: "RealTimeRouteRender",
-                        routePath: "/class/interactiveMap/realTimeRouteRender"
-                    },
-                    {
-                        id: 2.9,
+                        id: 2.7,
                         name: "3D Polygons",
                         slug: "3dPolygons",
                         image: "logo.png",
-                        description: "https://docs.mapbox.com/mapbox-gl-js/example/3d-extrusion-floorplan/",
+                        description: "https://docs.mapbox.com/mapbox-gl-js/example/3d-extrusion-floorplan/ " +
+                            "https://studio.mapbox.com/datasets/ " +
+                            "https://gist.github.com/ryanbaumann/a7d970386ce59d11c16278b90dde094d",
                         component: "3dPolygons",
                         routePath: "/class/interactiveMap/3dPolygons"
                     }
@@ -122,7 +104,27 @@ const store = createStore({
                 image: "logo.png",
                 description: "test3",
                 component: "OnScrollClass",
-                routePath: "/class/interactiveMap"
+                routePath: "/class/pathVisualization",
+                subclasses: [
+                    {
+                        id: 3.1,
+                        name: "Path following",
+                        slug: "PathFollowing",
+                        image: "logo.png",
+                        description: "https://docs.mapbox.com/mapbox-gl-js/example/free-camera-path/",
+                        component: "PathFollow",
+                        routePath: "/class/pathVisualization/pathFollow"
+                    },
+                    {
+                        id: 3.2,
+                        name: "Real-time route render",
+                        slug: "RouteRender",
+                        image: "logo.png",
+                        description: "https://docs.mapbox.com/mapbox-gl-js/example/live-update-feature/",
+                        component: "RealTimeRouteRender",
+                        routePath: "/class/interactiveMap/realTimeRouteRender"
+                    }
+                ]
             },
             {
                 id: 4,

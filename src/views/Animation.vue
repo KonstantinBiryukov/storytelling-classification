@@ -77,7 +77,7 @@ export default {
 
       var animations = [
         {
-          duration: 70.0,
+          duration: 40.0,
           animate: function (phase) {
             var start = [138.73375, 35.41914];
             var end = [138.72649, 35.33974];
@@ -92,7 +92,7 @@ export default {
           }
         },
         {
-          duration: 2000.0,
+          duration: 1000.0,
           animate: function (phase) {
             var start = [138.72649, 35.33974];
             var end = [138.72623, 35.31977];
@@ -109,7 +109,7 @@ export default {
           }
         },
         {
-          duration: 2000.0,
+          duration: 1000.0,
           animate: function (phase) {
 // create easing function for the animation
             var easeInOutQuad = function (t) {

@@ -16,21 +16,13 @@ export default {
   },
   computed: {
     map() {
-      return store.getters.createMap("map", 20, 40, 15.99,
-          [-87.61694, 41.86625], this.style, 9.5, true
+      return store.getters.createMap("map", 20, 40, 18.5,
+          [-94.1488197, 45.5528413], this.style, 16.5, true
       );
     }
   },
   mounted() {
     let map = this.map;
-
-    this.timeout = setTimeout(() => {
-      fetch('/Users/konstantinbiriukov/IdeaProjects/Master_Thesis/storytelling_classification/public/server/info/indoor-3d-map.geojson') //test 2
-          .then(response => response.json())
-          .then((data) => {
-            console.log(data);
-          });
-    }, 10000);
 
     map.on('load', function () {
       map.addSource('floorplan', {
@@ -38,8 +30,8 @@ export default {
 // https://gist.github.com/ryanbaumann/a7d970386ce59d11c16278b90dde094d
         'type': 'geojson',
         'data':
-            // 'https://docs.mapbox.com/mapbox-gl-js/assets/indoor-3d-map.geojson'
-        'server/info/indoor-3d-map.geojson'
+        // 'https://docs.mapbox.com/mapbox-gl-js/assets/indoor-3d-map.geojson'
+            'https://konstantinbiryukov.github.io/storytellingmaps-geojson/features3.geojson'
       });
       map.addLayer({
         'id': 'room-extrusion',
