@@ -84,15 +84,10 @@ const router = createRouter({
     // In the DevTools we can see that 'router-link-exact-active' is replaced by 'vue-school-active-class'.
     // Now these styles should be in the Navigation component.
     linkExactActiveClass: "vue-school-active-class",
+    mode: 'hash',
+    base: process.env.BASE_URL,
     routes
 });
 
 export default router;
 
-
-// {
-//     path: "/interactiveMap/:slug",
-//     name: "InteractiveMapDetails",
-//     component: () => import(/* webpackChunkName: "DestinationDetails" */ "../views/InteractiveMapDetails.vue"),
-//     props: true
-// },
