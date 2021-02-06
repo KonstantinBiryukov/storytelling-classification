@@ -1,6 +1,5 @@
 <template>
   <nav id="nav">
-    <!--    <Class/>-->
     <h2 class="classification-title">
       <router-link to="/">
         Story-telling maps Classification
