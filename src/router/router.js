@@ -3,7 +3,7 @@ import {createWebHistory, createRouter} from "vue-router";
 
 const routes = [
     {
-        path: "/", // url, the base url in this case
+        path: "/storytelling-classification/", // url, the base url in this case
         name: "Home", // the name of the root
         component: Home // A component the name refers to. We reported it above.
     },
@@ -84,8 +84,6 @@ const router = createRouter({
     // In the DevTools we can see that 'router-link-exact-active' is replaced by 'vue-school-active-class'.
     // Now these styles should be in the Navigation component.
     linkExactActiveClass: "vue-school-active-class",
-    mode: 'hash',
-    base: process.env.BASE_URL,
     routes
 });
 

@@ -7,7 +7,7 @@
     </h2>
     <ul class="nav-links">
       <li class="links">
-        <router-link to="/">
+        <router-link to="/storytelling-classification/">
           Home
         </router-link>
       </li>
