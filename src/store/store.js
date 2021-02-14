@@ -15,7 +15,6 @@ const store = createStore({
             {
                 id: 1,
                 name: "On-Scroll",
-                slug: "on-scroll",
                 image: "on-scroll.png",
                 description: "test",
                 component: "OnScrollClass",
@@ -24,7 +23,6 @@ const store = createStore({
             {
                 id: 2,
                 name: "Interactive dynamic maps",
-                slug: "video",
                 image: "logo.png",
                 description: "test2",
                 component: "OnScrollClass",
@@ -33,7 +31,6 @@ const store = createStore({
                     {
                         id: 2.1,
                         name: "Fly to a Location",
-                        slug: "FlyTo",
                         image: "logo.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/flyto/",
                         component: "FlyToLocation",
@@ -42,7 +39,6 @@ const store = createStore({
                     {
                         id: 2.2,
                         name: "Changes over time",
-                        slug: "changes",
                         image: "logo.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/adjust-layer-opacity/",
                         component: "ChangesOverTime",
@@ -51,7 +47,6 @@ const store = createStore({
                     {
                         id: 2.3,
                         name: "Control by sound",
-                        slug: "sound-control",
                         image: "logo.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/dancing-buildings/",
                         component: "ControlBySound",
@@ -60,7 +55,6 @@ const store = createStore({
                     {
                         id: 2.4,
                         name: "Video",
-                        slug: "video",
                         image: "logo.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/video-on-a-map/",
                         component: "VideoClass",
@@ -69,7 +63,6 @@ const store = createStore({
                     {
                         id: 2.5,
                         name: "Animation",
-                        slug: "animation",
                         image: "logo.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/free-camera-point/",
                         component: "Animation",
@@ -77,30 +70,35 @@ const store = createStore({
                     },
                     {
                         id: 2.6,
-                        name: "Swipe between maps",
-                        slug: "MapsSwipe",
+                        name: "Slideshow",
                         image: "logo.png",
-                        description: "https://docs.mapbox.com/mapbox-gl-js/example/mapbox-gl-compare/",
-                        component: "MapsSwipe",
-                        routePath: "/class/interactiveMap/mapsSwipe"
+                        description: "https://docs.mapbox.com/mapbox-gl-js/example/playback-locations/",
+                        component: "Slideshow",
+                        routePath: "/class/interactiveMap/slideshow"
                     },
                     {
                         id: 2.7,
                         name: "3D Polygons",
-                        slug: "3dPolygons",
                         image: "logo.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/3d-extrusion-floorplan/ " +
                             "https://studio.mapbox.com/datasets/ " +
                             "https://gist.github.com/ryanbaumann/a7d970386ce59d11c16278b90dde094d",
                         component: "3dPolygons",
                         routePath: "/class/interactiveMap/3dPolygons"
+                    },
+                    {
+                        id: 2.8,
+                        name: "Visual Popups",
+                        image: "logo.png",
+                        description: "https://docs.mapbox.com/mapbox-gl-js/example/3d-buildings/",
+                        component: "VisualPopups",
+                        routePath: "/class/interactiveMap/visualPopups"
                     }
                 ],
             },
             {
                 id: 3,
                 name: "Path visualization",
-                slug: "path-viz",
                 image: "logo.png",
                 description: "test3",
                 component: "OnScrollClass",
@@ -109,7 +107,6 @@ const store = createStore({
                     {
                         id: 3.1,
                         name: "Path following",
-                        slug: "PathFollowing",
                         image: "logo.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/free-camera-path/",
                         component: "PathFollow",
@@ -118,18 +115,24 @@ const store = createStore({
                     {
                         id: 3.2,
                         name: "Real-time route render",
-                        slug: "RouteRender",
                         image: "logo.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/live-update-feature/",
                         component: "RealTimeRouteRender",
-                        routePath: "/class/interactiveMap/realTimeRouteRender"
+                        routePath: "/class/pathVisualization/realTimeRouteRender"
+                    },
+                    {
+                        id: 3.3,
+                        name: "The object path along the route",
+                        image: "logo.png",
+                        description: "https://docs.mapbox.com/mapbox-gl-js/example/animate-point-along-route/",
+                        component: "ObjectPathAlongRoute",
+                        routePath: "/class/pathVisualization/pathAlongRoute"
                     }
                 ]
             },
             {
                 id: 4,
                 name: "Complex stories",
-                slug: "complex",
                 image: "complex.png",
                 description: "test4",
                 component: "OnScrollClass",

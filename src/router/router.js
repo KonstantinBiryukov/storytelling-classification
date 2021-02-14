@@ -49,14 +49,9 @@ const routes = [
         component: () => import(/* webpackChunkName: "Animation" */ "../views/Animation.vue"),
     },
     {
-        path: "/class/interactiveMap/RealTimeRouteRender",
-        name: "RealTimeRouteRender",
-        component: () => import(/* webpackChunkName: "RealTimeRouteRender" */ "../views/RealTimeRouteRender.vue"),
-    },
-    {
-        path: "/class/interactiveMap/MapsSwipe",
-        name: "MapsSwipe",
-        component: () => import(/* webpackChunkName: "MapsSwipe" */ "../views/MapsSwipe.vue"),
+        path: "/class/interactiveMap/slideshow",
+        name: "Slideshow",
+        component: () => import(/* webpackChunkName: "slideshow" */ "../views/Slideshow.vue"),
     },
     {
         path: "/class/interactiveMap/3dPolygons",
@@ -68,6 +63,23 @@ const routes = [
         name: "PathFollow",
         component: () => import(/* webpackChunkName: "PathFollow" */ "../views/PathFollow.vue"),
     },
+    {
+        path: "/class/pathVisualization/RealTimeRouteRender",
+        name: "RealTimeRouteRender",
+        component: () => import(/* webpackChunkName: "RealTimeRouteRender" */ "../views/RealTimeRouteRender.vue"),
+    },
+    {
+        path: "/class/pathVisualization/pathAlongRoute",
+        name: "ObjectPathAlongRoute",
+        component: () => import(/* webpackChunkName: "ObjectPathAlongRoute" */ "../views/ObjectPathAlongRoute.vue"),
+    },
+    {
+        path: "/class/interactiveMap/visualPopups",
+        name: "VisualPopups",
+        component: () => import(/* webpackChunkName: "3dPolygons" */ "../views/VisualPopups.vue"),
+    },
+
+
 ]
 
 const router = createRouter({

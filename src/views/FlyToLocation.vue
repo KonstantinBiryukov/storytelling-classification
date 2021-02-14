@@ -2,6 +2,7 @@
   <div id="fly-container">
     <div id="map"></div>
     <div id="cities">
+      <HelperWindow></HelperWindow>
       <div id="title"> {{ titleDescription }}</div>
       <div v-for="city in cities" :key="city.id">
         <button class="fly" @click="flyToCity(city)">
@@ -14,9 +15,11 @@
 
 <script>
 import store from "@/store/store";
+import HelperWindow from "@/components/HelperWindow";
 
 export default {
   name: "FlyToLocation",
+  components: {HelperWindow},
   data: function () {
     return {
       style: 'mapbox://styles/mapbox/streets-v11',
@@ -45,6 +48,7 @@ export default {
   },
   methods: {
     flyToCity(city) {
+      console.log(this.map)
       this.map.flyTo({
         center: city.coordinates,
         zoom: 10,
@@ -93,14 +97,14 @@ body {
 }
 
 .fly {
-  width: 30%;
+  width: 25%;
   font-size: 13px;
   color: #fff;
   background: #ee8a65;
 }
 
 #title {
-  width: 25%;
+  width: 23%;
   font-size: 12px;
   text-align: center;
   color: black;

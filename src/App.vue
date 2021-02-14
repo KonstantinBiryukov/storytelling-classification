@@ -26,15 +26,15 @@ export default {
   color: #2c3e50;
 }
 
-/*body {*/
-/*  margin: 0;*/
-/*  padding: 0;*/
-/*}*/
+body {
+  margin: 0;
+  padding: 0;
+}
 
-/*#map {*/
-/*  position: absolute;*/
-/*  top: 0;*/
-/*  bottom: 0;*/
-/*  width: 100%;*/
-/*}*/
+#map {
+  position: fixed;
+  width: 99%;
+  top: 20%;
+  bottom: 1%;
+}
 </style>

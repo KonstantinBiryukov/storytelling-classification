@@ -1,6 +1,5 @@
 <template>
   <div class="video-map-container">
-<!--    <img class="general-view" src="../assets/Rowena_Crest_Viewpoint.png" alt="RowenaCrestViewpoint">-->
     <div id="map">
     </div>
   </div>
@@ -33,16 +32,6 @@ export default {
               [-121.30366365825599, 45.680570463225905],
             ]
           },
-          // 'image' : {
-          //   'type': 'image',
-          //   'url': 'http://konstantinbiryukov.github.io/storytellingmaps-media/Rowena_Crest_Viewpoint.png',
-          //   'coordinates': [
-          //     [-121.30366365825599, 45.68560227229188],
-          //     [-121.30366365825599, 45.680570463225905],
-          //     [-121.31808882486713, 45.683736303300215],
-          //     [-121.33811489028996, 45.68442599390837],
-          //   ]
-          // }
         },
         'layers': [
           {
@@ -61,12 +50,7 @@ export default {
             'id': 'video',
             'type': 'raster',
             'source': 'video'
-          },
-          // {
-          //   'id': 'image',
-          //   'type': 'raster',
-          //   'source': 'image'
-          // }
+          }
         ]
       }
     }
@@ -79,32 +63,37 @@ export default {
     },
   },
   mounted() {
+    let mapboxgl = store.state.mapboxgl;
     this.map.setMaxZoom(15.1);
     let map = this.map;
-    var playingVideo = true;
+    let playingVideo = true;
 
+    // pause and play the video controllers
     map.on('click', function () {
       playingVideo = !playingVideo;
-
-      if (playingVideo) map.getSource('video').play();
-      else map.getSource('video').pause();
+      (playingVideo) ? map.getSource('video').play() : map.getSource('video').pause();
     });
+
+    new mapboxgl.Popup({closeOnClick: false, anchor: "right"})
+        .setLngLat([-121.3066365825599, 45.683770463225905])
+        .setHTML('<div id="popup-helper">Video is placed onto the top of the map location. Click on the video to pause. <br/><br/>' +
+            'Location: Rowena Crest Viewpoint, Moiser, Oregon, USA.</div>')
+        .addTo(map);
+
   }
 }
 </script>
 
-<style scoped>
-
-body {
-  margin: 0;
-  padding: 0;
+<style>
+.mapboxgl-popup-content {
+  border: orange 5px ridge;
 }
 
-#map {
-  position: fixed;
-  width: 99%;
-  top: 20%;
-  bottom: 1%;
+#popup-helper {
+  font-size: 12px;
+  font-family: Consolas, monaco, monospace;
+  font-weight: bold;
+  margin: 5px;
 }
 
 /*.general-view {*/
@@ -113,6 +102,4 @@ body {
 /*  bottom: 0;*/
 /*  right: 0;*/
 /*}*/
-
-
 </style>

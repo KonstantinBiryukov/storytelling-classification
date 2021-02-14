@@ -1,19 +1,69 @@
 <template>
   <div class="change-over-time-container">
-    <div id="map">
-<!--      <img id="map-stcloud" :src="require('../assets/StCloudMap.png')"/>-->
-    </div>
+    <div id="map"></div>
+
     <div class="map-overlay top">
       <div class="map-overlay-inner">
-        <label>Layer opacity: <span id="slider-value">100%</span></label>
-        <input
-            id="slider"
-            type="range"
-            min="0"
-            max="100"
-            step="0"
-            value="100"
-        />
+        <h2>Significant earthquakes in 2021</h2>
+        <label id="month"></label>
+        <input id="slider" type="range" min="0" max="11" step="1" value="0"/>
+      </div>
+      <div class="map-overlay-inner">
+        <div id="legend" class="legend">
+          <div class="bar"></div>
+          <div>Magnitude (m).
+            <div class="magnitude-description">Minimal magnitude is 6. [Richter magnitude scale]</div>
+            <div class="magnitude-description">Data source: <a href="https://earthquake.usgs.gov/" target="_blank">https://earthquake.usgs.gov/</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="map-overlay-inner">
+        Top 5 earthquakes by magnitude in <span id="year-2020">2020</span>:
+        <table class="top-earthquakes-table">
+          <tr>
+            <th>Rank</th>
+            <th>Magnitude</th>
+            <th>Death toll</th>
+            <th>Location</th>
+            <th>Date</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>7.8</td>
+            <td>0</td>
+            <td>United States, Alaska offshore</td>
+            <td>July 22</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>7.7</td>
+            <td>0</td>
+            <td>Jamaica, Hanover offshore</td>
+            <td>January 28</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>7.6</td>
+            <td>0</td>
+            <td>United States, Alaska offshore</td>
+            <td>October 19</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>7.5</td>
+            <td>0</td>
+            <td>Russia, Kuril Islands offshore</td>
+            <td>March 25</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>7.4</td>
+            <td>10</td>
+            <td>Mexico, Oaxaca</td>
+            <td>June 23</td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
@@ -21,8 +71,8 @@
 
 
 <script>
+import * as d3 from 'd3';
 import store from "@/store/store";
-// import image from "src/assets/StCloudMap.png";
 
 export default {
   name: "ChangeOverTime",
@@ -34,75 +84,152 @@ export default {
   },
   computed: {
     map() {
-      return store.getters.createMap("map", 0, 0, 9.5,
-          [-87.6321, 41.8362], this.style, 9.5
+      return store.getters.createMap("map", 0, 0, 0.5,
+          [31.4606, 20.7927], this.style, 0.5, true
       );
     }
   },
   mounted() {
     let map = this.map;
-    let slider = document.getElementById('slider');
-    let sliderValue = document.getElementById('slider-value');
+    let mapboxgl = store.state.mapboxgl;
+    map.addControl(new mapboxgl.NavigationControl());
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+
+    function filterBy(month) {
+      let filters = ['==', 'month', month];
+      map.setFilter('earthquake-circles', filters);
+      map.setFilter('earthquake-labels', filters);
+
+      // Set the label to the month
+      document.getElementById('month').textContent = months[month];
+    }
 
     map.on('load', function () {
-      map.addSource('chicago', {
-        'type': 'image',
-        'url': 'https://konstantinbiryukov.github.io/storytellingmaps-media/StCloudMap.png',
-        // 'url': 'mapbox://mapbox.u8yyzaor',
-        'coordinates' : [
-            [41.93364304130842, -87.78871701147162],
-            [42.02699927016955, -87.51501644417941],
-            [41.72535158392222, -87.46557796781107],
-            [41.768087789171894, -87.98246006483011]
-        ]
-      });
+      // Data: http://earthquake.usgs.gov/
+      // Query for significant earthquakes in 2020 : (geojson with start- and end-time, and minmagnitude)
+      // http://earthquake.usgs.gov/fdsnws/event/1/query
+      //    ?format=geojson
+      //    &starttime=2020-01-01
+      //    &endtime=2020-12-31
+      //    &minmagnitude=6'
 
-      map.addLayer({
-        'id': 'chicago',
-        'source': 'chicago',
-        'type': 'raster'
-      });
+      // d3.js library is used to help making the ajax request
+      d3.json(
+          'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2021-01-01&endtime=2021-12-31&minmagnitude=6',
+          function (err, data) {
+            if (err) throw err;
 
-      slider.addEventListener('input', function (e) {
-        // Adjust the layers opacity. layer here is arbitrary - this could
-        // be another layer name found in your style or a custom layer
-        // added on the fly using `addSource`.
-        map.setPaintProperty(
-            'chicago',
-            'raster-opacity',
-            parseInt(e.target.value, 10) / 100
-        );
+            // Create a month property value based on time used for filter.
+            data.features = data.features.map(function (d) {
+              d.properties.month = new Date(d.properties.time).getMonth();
+              return d;
+            });
 
-        // Value indicator
-        sliderValue.textContent = e.target.value + '%';
-      });
+            map.addSource('earthquakes', {
+              'type': 'geojson',
+              data: data
+            });
+
+            map.addLayer({
+              'id': 'earthquake-circles',
+              'type': 'circle',
+              'source': 'earthquakes',
+              'paint': {
+                'circle-color': [
+                  'interpolate',
+                  ['linear'],
+                  ['get', 'mag'],
+                  6,
+                  '#FCA107',
+                  8,
+                  '#7F3121'
+                ],
+                'circle-opacity': 0.75,
+                'circle-radius': [
+                  'interpolate',
+                  ['linear'],
+                  ['get', 'mag'],
+                  6,
+                  20,
+                  8,
+                  40
+                ]
+              }
+            });
+
+            map.addLayer({
+              'id': 'earthquake-labels',
+              'type': 'symbol',
+              'source': 'earthquakes',
+              'layout': {
+                'text-field': [
+                  'concat',
+                  ['to-string', ['get', 'mag']],
+                  'm'
+                ],
+                'text-font': [
+                  'Open Sans Bold',
+                  'Arial Unicode MS Bold'
+                ],
+                'text-size': 13
+              },
+              'paint': {
+                'text-color': 'rgba(0,0,0,0.5)'
+              }
+            });
+
+            // Set filter to the first month of the year; 0 = January
+            filterBy(0);
+
+            map.on('click', 'earthquake-circles', function (e) {
+              let coordinates = e.features[0].geometry.coordinates.slice();
+              let link = e.features[0].properties.url;
+              let description = '<a href="' + link + '" target="blank">' + e.features[0].properties.title + '</a>';
+
+              // Ensure that if the map is zoomed out such that multiple
+              // copies of the feature are visible, the popup appears over the copy being pointed to.
+              while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+              }
+              new mapboxgl.Popup()
+                  .setLngLat(coordinates)
+                  .setHTML(description)
+                  .addTo(map);
+
+            });
+
+            document
+                .getElementById('slider')
+                .addEventListener('input', function (e) {
+                  let month = parseInt(e.target.value, 10);
+                  filterBy(month);
+                });
+          }
+      );
     });
   }
 }
 </script>
 
 <style scoped>
-
-body {
-  margin: 0;
-  padding: 0;
-}
-
-#map {
-  position: fixed;
-  width: 99%;
-  top: 20%;
-  bottom: 1%;
-}
-
 .map-overlay {
-  font: bold 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  /*position: absolute;*/
-  position: fixed;
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  position: absolute;
   width: 25%;
-  /*top: 0;*/
   top: 20%;
-  bottom: 1%;
   left: 0;
   padding: 10px;
 }
@@ -112,12 +239,20 @@ body {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  border: orange 5px ridge;
 }
 
-.map-overlay label {
+.map-overlay h2 {
+  line-height: 24px;
   display: block;
   margin: 0 0 10px;
+}
+
+.map-overlay .legend .bar {
+  height: 10px;
+  width: 100%;
+  background: linear-gradient(to right, #fca107, #7f3121);
 }
 
 .map-overlay input {
@@ -129,10 +264,40 @@ body {
   cursor: ew-resize;
 }
 
-#map-stcloud {
-  position: relative;
-  width: 50%;
-  height: 100%;
-  z-index: 1;
+.magnitude-description {
+  font-size: 10px;
+  color: darkblue;
 }
+
+.top-earthquakes-table {
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+
+.top-earthquakes-table td {
+  border-top: 1px solid black;
+}
+
+.top-earthquakes-table th {
+  border-right: 1px solid black;
+}
+
+.map-overlay-bottom {
+  background-color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 1px;
+}
+
+.map-overlay-bottom p {
+  margin: 0;
+  padding: 0;
+}
+
+#year-2020 {
+  font-weight: bold;
+  font-size: 13px;
+  text-decoration: underline;
+}
+
 </style>

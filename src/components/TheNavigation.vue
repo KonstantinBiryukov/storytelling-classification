@@ -5,29 +5,34 @@
         Story-telling maps Classification
       </router-link>
     </h2>
-    <ul class="nav-links">
-      <li class="links">
-        <router-link to="/storytelling-classification/">
-          Home
-        </router-link>
-      </li>
-      <li v-for="classMap in classes" :key="classMap.id" class="links">
-        <a v-if="classMap.id === 4" href="https://konstantinbiryukov.github.io/last-of-us-map/" target="_blank">
-          {{ classMap.id + ". " + classMap.name }}
-        </a>
-        <router-link v-else :to="classMap.routePath">
-          {{ classMap.id + ". " + classMap.name }}
-        </router-link>
-      </li>
-    </ul>
+    <div id="main-nav-container">
+      <ul class="nav-links">
+        <li class="links">
+          <router-link to="/storytelling-classification/">
+            Home
+          </router-link>
+        </li>
+        <li v-for="classMap in classes" :key="classMap.id" class="links">
+          <a v-if="classMap.id === 4" href="https://konstantinbiryukov.github.io/last-of-us-map/" target="_blank">
+            {{ classMap.id + ". " + classMap.name }}
+          </a>
+          <router-link v-else :to="classMap.routePath">
+            {{ classMap.id + ". " + classMap.name }}
+          </router-link>
+        </li>
+      </ul>
+      <HelperCheckbox></HelperCheckbox>
+    </div>
   </nav>
 </template>
 
 <script>
 import store from '@/store/store';
+import HelperCheckbox from '@/components/HelperCheckbox'
 
 export default {
   name: 'MainPage',
+  components: {HelperCheckbox},
   data() {
     return {
       classes: store.state.classes,

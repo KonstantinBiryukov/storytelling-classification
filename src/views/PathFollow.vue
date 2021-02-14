@@ -15,7 +15,6 @@ export default {
   data: function () {
     return {
       style: 'mapbox://styles/mapbox-map-design/ckhqrbxlc1awj19svtb92m0bd',
-      // myRoutes: routes
     }
   },
   computed: {
@@ -29,7 +28,7 @@ export default {
     }
   },
   mounted() {
-    // `routes` comes from https://docs.mapbox.com/mapbox-gl-js/assets/routes.js,
+// `routes` comes from https://docs.mapbox.com/mapbox-gl-js/assets/routes.js,
 // which has properties that are in the shape of an array of arrays that correspond
 //  to the `coordinates` property of a GeoJSON linestring, for example:
 // [

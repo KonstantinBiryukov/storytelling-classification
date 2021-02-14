@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="classes">
-      <div v-for="classMap in subclasses" :key="classMap.id">
+      <div class="class" v-for="classMap in subclasses" :key="classMap.id">
           <router-link :to="classMap.routePath">
           <h2>
             {{ classMap.id + ". " + classMap.name }}
@@ -37,7 +37,6 @@ export default {
   margin: 0 auto;
   top: 20%;
   position: absolute;
-
 }
 
 img {
@@ -48,6 +47,10 @@ img {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.class {
+  margin: 5px;
 }
 
 a {
