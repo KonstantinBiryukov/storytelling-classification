@@ -74,32 +74,16 @@ export default {
       (playingVideo) ? map.getSource('video').play() : map.getSource('video').pause();
     });
 
+    // popup helper with description
     new mapboxgl.Popup({closeOnClick: false, anchor: "right"})
         .setLngLat([-121.3066365825599, 45.683770463225905])
-        .setHTML('<div id="popup-helper">Video is placed onto the top of the map location. Click on the video to pause. <br/><br/>' +
+        .setHTML('<div class="popup-helper">Video is placed onto the top of the map location. Click on the video to pause. <br/><br/>' +
             'Location: Rowena Crest Viewpoint, Moiser, Oregon, USA.</div>')
         .addTo(map);
-
   }
 }
 </script>
 
 <style>
-.mapboxgl-popup-content {
-  border: orange 5px ridge;
-}
 
-#popup-helper {
-  font-size: 12px;
-  font-family: Consolas, monaco, monospace;
-  font-weight: bold;
-  margin: 5px;
-}
-
-/*.general-view {*/
-/*  width: 20%;*/
-/*  height: 40%;*/
-/*  bottom: 0;*/
-/*  right: 0;*/
-/*}*/
 </style>

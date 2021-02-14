@@ -37,4 +37,15 @@ body {
   top: 20%;
   bottom: 1%;
 }
+
+.mapboxgl-popup-content {
+  border: orange 5px ridge;
+}
+
+.popup-helper {
+  font-size: 12px;
+  font-family: Consolas, monaco, monospace;
+  font-weight: bold;
+  margin: 5px;
+}
 </style>

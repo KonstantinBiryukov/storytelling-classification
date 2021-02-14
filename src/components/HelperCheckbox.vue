@@ -1,11 +1,15 @@
 <template>
   <div id="helper-checkbox">
     <input type="checkbox" id="helper" name="helper" v-model="checked">
-    <label for="helper">Turn <span id="checkbox-status"> {{ checked ? "off" : "on" }} </span> the helper mode</label>
+    <label for="helper">Turn <span id="checkbox-status">
+      {{ checked ? "off" : "on" }}
+    </span> the helper mode</label>
   </div>
 </template>
 
 <script>
+// import store from "@/store/store";
+
 export default {
   name: "HelperCheckbox",
   data() {

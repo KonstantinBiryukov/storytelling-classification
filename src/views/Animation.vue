@@ -77,7 +77,7 @@ export default {
           duration: 130.0,
           animate: function (phase) {
             let start = [-122.1591817072966, 42.889970507106916];
-            let end = [ -122.14671429878624,  42.94240583812641];
+            let end = [-122.14671429878624, 42.94240583812641];
 
             let alt = [13000.0, 3500.0];
 
@@ -92,7 +92,7 @@ export default {
         {
           duration: 60,
           animate: function (phase) {
-            let start = [ -122.14671429878624,  42.94240583812641];
+            let start = [-122.14671429878624, 42.94240583812641];
             let end = [-122.14187181333054, 42.96081404622487];
 
             let alt = [3500.0, 16000.0];
@@ -135,22 +135,21 @@ export default {
       window.requestAnimationFrame(frame);
     });
 
+    // popup helper with description
+    new mapboxgl.Popup({closeOnClick: false, anchor: "center"})
+        .setLngLat([-122.20597690976275, 42.939651624236146])
+        .setHTML('<div id="animation-helper" class="popup-helper">Cinematographic animation with 3D terrain.<br/><br/>' +
+            'Location: Crater Lake, Wizard Island, Oregon, USA.</div>')
+        .addTo(map);
+
   }
 }
 
 </script>
 
 
-<style scoped>
-body {
-  margin: 0;
-  padding: 0;
-}
-
-#map {
-  position: fixed;
-  width: 99%;
-  top: 20%;
-  bottom: 1%;
+<style>
+#animation-helper {
+ margin: 0;
 }
 </style>

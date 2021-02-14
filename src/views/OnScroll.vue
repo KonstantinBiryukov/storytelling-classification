@@ -96,6 +96,7 @@ export default {
     const center = [-94.1666716, 45.5558578];
     const zoom = 12;
     let map = this.map;
+    let mapboxgl = store.state.mapboxgl;
 
     this.map.flyTo({
       'center': center,
@@ -171,7 +172,12 @@ export default {
     }
 
     document.getElementById("onscroll-class").style.overflow = 'hidden'
-    // store.dispatch('fetchMarkers');
+
+    // popup helper with description
+    new mapboxgl.Popup({closeOnClick: false, anchor: "right"})
+        .setLngLat([ -94.09387611492849, 45.58555070865936])
+        .setHTML('<div class="popup-helper">Scroll-down the page to start the story.</div>')
+        .addTo(map);
   },
 
 }
@@ -180,12 +186,7 @@ export default {
 </script>
 
 <style scoped>
-/*#map {*/
-/*  position: absolute;*/
-/*  top: 15vh;*/
-/*  bottom: 0;*/
-/*  width: 100%;*/
-/*}*/
+
 .section-image {
   width: 75%;
 }

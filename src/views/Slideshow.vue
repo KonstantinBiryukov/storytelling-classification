@@ -5,12 +5,12 @@
     <div class="map-overlay">
       <h2 id="location-title"></h2>
       <p id="location-description"></p>
-      <small
-      >Text credit:
-        <a target="_blank" href="http://www.nycgo.com/neighborhoods"
-        >nycgo.com</a
-        ></small
-      >
+<!--      <small-->
+<!--      >Text credit:-->
+<!--        <a target="_blank" href="http://www.nycgo.com/neighborhoods"-->
+<!--        >nycgo.com</a-->
+<!--        ></small-->
+<!--      >-->
     </div>
   </div>
 </template>
@@ -27,8 +27,8 @@ export default {
   },
   computed: {
     map() {
-      return store.getters.createMap("map", 0, 0, 16,
-          [-122.39217274661704, 37.787049476763244, ], this.style, 9, false
+      return store.getters.createMap("map", 0, 0, 0,
+          [-84.0735768959837, 44.47279664463965], this.style, 5, false
       );
 
     }
@@ -41,67 +41,66 @@ export default {
     var locations = [
       {
         'id': '2',
-        'title': 'The Bronx',
+        'title': 'Lake Superior',
         'description':
-            "This is where hip-hop was born, where the Yankees became a dynasty and where you can find New York City's leading zoo and botanical garden.",
+            "The largest of the Great Lakes of North America, the world's largest freshwater lake by surface area, and the third-largest freshwater lake by volume.",
         'camera': {
-          center: [ -122.39334356061455, 37.788206107980976
-          ],
-          zoom: 12.21,
+          center: [-87.65298432298495, 47.869318744146035],
+          zoom: 6,
           pitch: 0
         }
       },
       {
         'id': '3',
-        'title': 'Brooklyn',
+        'title': 'Lake Michigan',
         'description':
-            "No matter how hip it looks on TV, NYC's most populous borough is best experienced in person. Read on to find out about live music, Prospect Park, Nets basketball and more.",
+            "One of the five Great Lakes of North America. It is the second-largest of the Great Lakes by volume and the third-largest by surface area",
         'camera': {
-          center: [-122.40695989978401, 37.79381516863956],
+          center: [-86.97567365378887, 44.10015628998541],
           bearing: 0,
-          zoom: 11.68
-        }
-      },
-      {
-        'id': '1',
-        'title': 'Manhattan',
-        'description':
-            'Even if you think you know Manhattan—its world-class museums, fine dining and unforgettable views—the borough always has something new and exciting in store.',
-        'camera': {
-          center: [-74.007, 40.7437],
-          bearing: 25.3,
-          zoom: 11.5
+          zoom: 6
         }
       },
       {
         'id': '4',
-        'title': 'Queens',
+        'title': 'Lake Huron',
         'description':
-            "Taste food from around the globe, watch Mets baseball and US Open tennis, see cutting-edge art and more in one of the world's most diverse places.",
+            'By surface area, Lake Huron is the second-largest of the Great Lakes. Hydrologically, it comprises the easterly portion of Lake Michigan–Huron, having the same surface elevation as its westerly counterpart.',
         'camera': {
-          center: [-73.8432, 40.6923],
-          bearing: 36,
-          zoom: 11.37
+          center: [-82.36802044844158, 44.85269068766738],
+          bearing: 25.3,
+          zoom: 6
         }
       },
       {
         'id': '5',
-        'title': 'Staten Island',
+        'title': 'Lake Erie',
         'description':
-            'Take a free ferry ride to an island getaway filled with historic architecture, stunning views, gardens and many family-friendly attractions.',
+            "The fourth-largest lake (by surface area) of the five Great Lakes in North America and the eleventh-largest globally. It is the southernmost, shallowest, and smallest by volume of the Great Lakes.",
         'camera': {
-          center: [-74.1991, 40.5441],
-          bearing: 28.4,
-          zoom: 11.64
+          center: [-81.26296296200259, 42.25019652216405],
+          bearing: 36,
+          zoom: 6
         }
       },
       {
-        'title': 'Boroughs of new york',
+        'id': '6',
+        'title': 'Lake Ontario',
         'description':
-            'New York City is made up of five boroughs: the Bronx, Brooklyn, Manhattan, Queens and Staten Island. Each one has enough attractions—and enough personality—to be a city all its own.',
+            'The easternmost of the Great Lakes and the smallest in surface area, although it exceeds Lake Erie in volume. It is the 13th largest lake in the world. It is the only Great Lake not to border the state of Michigan.',
         'camera': {
-          center: [-74.0315, 40.6989],
-          zoom: 9.68,
+          center: [-77.92353164015204, 43.68261986853817],
+          bearing: 28.4,
+          zoom: 6
+        }
+      },
+      {
+        'title': 'The Great Lakes',
+        'description':
+            'The Great Lakes, also called the Great Lakes of North America, are a series of large interconnected freshwater lakes in the upper mid-east region of North America that connect to the Atlantic Ocean via the Saint Lawrence River. They are lakes Superior, Michigan, Huron, Erie, and Ontario and are in general on or near the Canada–United States border. Hydrologically, there are four lakes, because lakes Michigan and Huron join at the Straits of Mackinac.',
+        'camera': {
+          center: [-84.0735768959837, 44.47279664463965],
+          zoom: 3,
           bearing: 0,
           pitch: 0
         }
@@ -110,7 +109,7 @@ export default {
 
     function highlightBorough(code) {
 // Only show the polygon feature that cooresponds to `borocode` in the data
-      map.setFilter('highlight', ['==', 'borocode', code]);
+      map.setFilter('highlight', ['==', 'id', code]);
     }
 
     function playback(index) {
@@ -128,7 +127,7 @@ export default {
 // Increment index
           index = index + 1 === locations.length ? 0 : index + 1;
           playback(index);
-        }, 3000); // After callback, show the location for 3 seconds.
+        }, 5000); // After callback, show the location for 3 seconds.
       });
     }
 
@@ -137,25 +136,25 @@ export default {
     description.textContent = locations[locations.length - 1].description;
 
     map.on('load', function () {
-      map.addSource('boroughs', {
-        'type': 'vector',
-        // 'url': 'mapbox://mapbox.8ibmsn6u'
-        'url': 'https://gist.githubusercontent.com/cdolek/d08cac2fa3f6338d84ea/raw/ebe3d2a4eda405775a860d251974e1f08cbe4f48/SanFrancisco.Neighborhoods.json'
-      });
-      map.addLayer(
-          {
-            'id': 'highlight',
-            'type': 'fill',
-            'source': 'boroughs',
-            'source-layer': 'original',
-            'paint': {
-              'fill-color': '#fd6b50',
-              'fill-opacity': 0.25
-            },
-            'filter': ['==', 'borocode', '']
-          },
-          'settlement-subdivision-label'
-      ); // Place polygon under the neighborhood labels.
+      // map.addSource('boroughs', {
+      //   'type': 'geojson',
+      //   // 'url': 'mapbox://mapbox.8ibmsn6u'
+      //   'url': 'https://gist.githubusercontent.com/tristanwietsma/6046119/raw/f5e8654b5a811199d2f2190b3090d1c1e3488436/greatlakes.geojson'
+      // });
+      // map.addLayer(
+      //     {
+      //       'id': 'highlight',
+      //       'type': 'fill',
+      //       'source': 'boroughs',
+      //       // 'source-layer': 'original',
+      //       'paint': {
+      //         'fill-color': '#fd6b50',
+      //         'fill-opacity': 0.25
+      //       },
+      //       // 'filter': ['==', 'id', '']
+      //     },
+      //     // 'settlement-subdivision-label'
+      // ); // Place polygon under the neighborhood labels.
 
 // Start the playback animation for each borough
       playback(0);
@@ -188,7 +187,7 @@ body {
 }
 
 .map-overlay {
-  font: 18px/22px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font: 18px/22px Georgia, Times, Times New Roman, serif;
   background-color: #fff;
   border-radius: 3px;
   padding: 10px;
@@ -199,5 +198,4 @@ body {
 .map-overlay p {
   margin: 0 0 10px;
 }
-
 </style>

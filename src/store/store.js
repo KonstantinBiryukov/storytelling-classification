@@ -11,6 +11,7 @@ const store = createStore({
         mapboxgl: mapboxgl,
         map: "",
         d3: d3,
+        helpMode: "on",
         classes: [
             {
                 id: 1,
@@ -163,6 +164,11 @@ const store = createStore({
             return store.getters.createMap("map", 0, 55, 15,
                 [-122.019807, 45.632433], "mapbox://styles/mapbox/satellite-v9", 12);
         },
+    },
+    watch: {
+        '$store.state.helpMode': function (){
+            console.log(this.$store.state.helpMode)
+        }
     }
 });
 

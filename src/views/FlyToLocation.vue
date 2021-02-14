@@ -2,7 +2,6 @@
   <div id="fly-container">
     <div id="map"></div>
     <div id="cities">
-      <HelperWindow></HelperWindow>
       <div id="title"> {{ titleDescription }}</div>
       <div v-for="city in cities" :key="city.id">
         <button class="fly" @click="flyToCity(city)">
@@ -15,11 +14,10 @@
 
 <script>
 import store from "@/store/store";
-import HelperWindow from "@/components/HelperWindow";
+import mapboxgl from "mapbox-gl";
 
 export default {
   name: "FlyToLocation",
-  components: {HelperWindow},
   data: function () {
     return {
       style: 'mapbox://styles/mapbox/streets-v11',
@@ -59,24 +57,22 @@ export default {
   mounted() {
     let map = this.map;
     map.on('load', function () {
+
+      // popup helper with description
+      new mapboxgl.Popup({closeOnClick: false, anchor: "center", maxWidth: "300px"})
+          .setLngLat([-74.00007624098903, 40.049415406125])
+          .setHTML('<div id="fly-helper" class="popup-helper">' +
+              'The 10 most populous cities of the United States in 2020. ' +
+              'Population is approximate and represented in Millions of people (in parenthesis). ' +
+              'Click on city to fly to the specific location.</div>')
+          .addTo(map);
+
     });
   }
 }
 </script>
 
 <style scoped>
-body {
-  margin: 0;
-  padding: 0;
-}
-
-#map {
-  position: fixed;
-  width: 99%;
-  top: 20%;
-  bottom: 1%;
-}
-
 #fly-container {
   position: fixed;
   width: 99%;
@@ -94,21 +90,24 @@ body {
   border: none;
   border-radius: 3px;
   text-align: center;
+  font-weight: bold;
 }
 
 .fly {
   width: 25%;
   font-size: 13px;
-  color: #fff;
+  color: black;
   background: #ee8a65;
+  font-family: Consolas, monaco, monospace;
 }
 
 #title {
   width: 23%;
   font-size: 12px;
   text-align: center;
-  color: black;
+  color: darkblue;
   background: darkorange;
+  padding-bottom: 20px;
 }
 
 </style>

@@ -77,9 +77,7 @@ const routes = [
         path: "/class/interactiveMap/visualPopups",
         name: "VisualPopups",
         component: () => import(/* webpackChunkName: "3dPolygons" */ "../views/VisualPopups.vue"),
-    },
-
-
+    }
 ]
 
 const router = createRouter({

@@ -113,7 +113,7 @@ export default {
             function draw(now) {
               analyser.getByteFrequencyData(dataArray);
 
-            // Use that data to drive updates to the fill-extrusion-height property.
+              // Use that data to drive updates to the fill-extrusion-height property.
               let avg = 0;
               for (let i = 0; i < bins; i++) {
                 avg += dataArray[i];
@@ -150,20 +150,29 @@ export default {
 
     // fullScreen mode
     map.addControl(new mapboxgl.FullscreenControl());
+
+    // popup helper with description
+    new mapboxgl.Popup({closeOnClick: false, maxWidth: "340px"})
+        .setLngLat([-74.00228691746983, 40.7028790176044])
+        .setHTML('<div id="sound-helper" class="popup-helper">The heights of the buildings are controlled by the user sound. ' +
+            'The louder the sound that user makes the faster building “moves” changing their heights. ' +
+            '<div id="mic-permission">Permission to access the microphone is required.</div>' +
+            '<br/>' +
+            'Location: New York City, Manhattan, USA.</div>')
+        .addTo(map);
   }
 }
 </script>
 
-<style scoped>
-body {
+<style>
+#sound-helper {
+  font-size: 11px;
   margin: 0;
-  padding: 0;
 }
 
-#map {
-  position: fixed;
-  width: 99%;
-  top: 20%;
-  bottom: 1%;
+#mic-permission {
+  color: red;
+  font-weight: bold;
+  text-decoration: underline;
 }
 </style>
