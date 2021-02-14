@@ -5,6 +5,7 @@
 
 <script>
 import store from "@/store/store";
+import mapboxgl from "mapbox-gl";
 
 export default {
   name: "3dPolygons",
@@ -52,6 +53,13 @@ export default {
           'fill-extrusion-opacity': 0.5
         }
       });
+
+      new mapboxgl.Popup({closeOnClick: false, anchor: "right"})
+          .setLngLat([-94.1491197, 45.5528413])
+          .setHTML('<div id="polygons-helper" class="popup-helper">3D indoor polygons.</br> ' +
+              'Building: Saint Cloud State University, a part of the Stewart Hall. ' +
+              'A part of the building is very schematic, created for demonstration purposes.</div>')
+          .addTo(map);
     });
 
   }

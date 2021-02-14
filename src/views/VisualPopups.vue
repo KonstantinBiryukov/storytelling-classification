@@ -19,10 +19,10 @@ export default {
   data: function () {
     return {
       style: 'mapbox://styles/mapbox/streets-v11',
-      locations: [
-        {"id": 1, name: "disney", text: "Walt Disney Concert Hall"},
-        {"id": 2, name: "broad", text: "Broad Museum"},
-      ]
+      // locations: [
+      //   {"id": 1, name: "disney", text: "Walt Disney Concert Hall"},
+      //   {"id": 2, name: "broad", text: "Broad Museum"},
+      // ]
     }
   },
   computed: {
@@ -93,13 +93,21 @@ export default {
           .setLngLat(bradburyCoord)
           .setPopup(bradburyPopup) // sets a popup on this marker
           .addTo(map);
+
+      new mapboxgl.Popup({closeOnClick: false, anchor: "right"})
+          .setLngLat( [-118.2662335, 34.0651156])
+          .setHTML('<div id="polygons-helper" class="popup-helper">Markers represent the image of the location. <br>' +
+              'Click on the marker to see a name of the building and the description.<br><br> ' +
+              'Location: Los Angeles, downtown, USA.</div>')
+          .addTo(map);
+
     });
   }
 }
 </script>
 
 <style >
-.marker #marker-disney {
+#marker-disney {
   background-image: url('https://offloadmedia.feverup.com/secretlosangeles.com/wp-content/uploads/2020/01/22094750/shutterstock_426455206.jpg');
   background-size: cover;
   width: 60px;
