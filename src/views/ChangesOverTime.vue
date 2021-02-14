@@ -219,10 +219,28 @@ export default {
                 });
           }
       );
+      // popup helper with description
+      new mapboxgl.Popup({closeOnClick: false, anchor: "center"})
+          .setLngLat([-55.918112188335495, 71.19160056082046])
+          .setHTML('<div id="time-changes-helper" class="popup-helper">' +
+              'The map lets the user to take a look to the locations of significant earthquakes for each month of 2021 ' +
+              'and how those earthquakes are spread over the world. ' +
+              'Use slider to choose a specific month. The map uses real-time data.' +
+              '</div>')
+          .addTo(map);
+
     });
   }
 }
 </script>
+
+<style>
+#time-changes-helper {
+ font-size: 10px;
+  margin: 0;
+  padding: 0;
+}
+</style>
 
 <style scoped>
 .map-overlay {

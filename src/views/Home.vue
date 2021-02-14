@@ -1,15 +1,15 @@
 <template>
   <div class="home">
     <div class="classes">
-      <div v-for="classMap in classes" :key="classMap.id">
+      <div class="class" v-for="classMap in classes" :key="classMap.id">
         <a v-if="classMap.id === 4" href="https://konstantinbiryukov.github.io/last-of-us-map/" target="_blank">
           <h2>
-            {{ classMap.name }}
+            {{ classMap.id + ". " + classMap.name }}
           </h2>
         </a>
         <router-link v-else :to="classMap.routePath">
           <h2>
-            {{ classMap.name }}
+            {{ classMap.id + ". " + classMap.name }}
           </h2>
         </router-link>
         <figure>
@@ -49,13 +49,18 @@ export default {
 }
 
 img {
-  max-width: 200px;
+  /*max-width: 220px;*/
+  min-width: 300px;
 }
 
 .classes {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
+}
+
+.class {
+  width: 500px;
 }
 
 a {

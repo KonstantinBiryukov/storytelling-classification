@@ -19,21 +19,23 @@ export default {
   },
   computed: {
     map() {
-      return store.getters.createMap("map", 0, 0, 2,
-          [-40.6861245, 59.2268129], this.style, 2, true
+      return store.getters.createMap("map", 0, 0, 1.5,
+          [-40.6861245, 59.2268129], this.style, 1, true
       );
     }
   },
   mounted() {
     let map = this.map;
-    // Moscow
-    var origin = [37.4103143, 55.9736512];
+    let mapboxgl = store.state.mapboxgl;
 
-// Minneapolis
-    var destination = [-93.2244733, 44.8847592];
+    // Sheremetyevo, Moscow
+    const origin = [37.4103143, 55.9736512];
 
-// A simple line from origin to destination.
-    var route = {
+    // LAX,LA
+    const destination = [-118.40511299589207, 33.944011419272634];
+
+    // A simple line from origin to destination.
+    let route = {
       'type': 'FeatureCollection',
       'features': [
         {
@@ -46,9 +48,9 @@ export default {
       ]
     };
 
-// A single point that animates along the route.
-// Coordinates are initially set to origin.
-    var point = {
+    // A single point that animates along the route.
+    // Coordinates are initially set to origin.
+    let point = {
       'type': 'FeatureCollection',
       'features': [
         {
@@ -62,30 +64,30 @@ export default {
       ]
     };
 
-// Calculate the distance in kilometers between route start/end point.
-    var lineDistance = turf.length(route.features[0]);
+    // Calculate the distance in kilometers between route start/end point.
+    let lineDistance = turf.length(route.features[0]);
 
-    var arc = [];
+    let arc = [];
 
-// Number of steps to use in the arc and animation, more steps means
-// a smoother arc and animation, but too many steps will result in a
-// low frame rate
-    var steps = 500;
+    // Number of steps to use in the arc and animation, more steps means
+    // a smoother arc and animation, but too many steps will result in a
+    // low frame rate
+    let steps = 500;
 
-// Draw an arc between the `origin` & `destination` of the two points
-    for (var i = 0; i < lineDistance; i += lineDistance / steps) {
-      var segment = turf.along(route.features[0], i);
+    // Draw an arc between the `origin` & `destination` of the two points
+    for (let i = 0; i < lineDistance; i += lineDistance / steps) {
+      let segment = turf.along(route.features[0], i);
       arc.push(segment.geometry.coordinates);
     }
 
-// Update the route with calculated arc coordinates
+    // Update the route with calculated arc coordinates
     route.features[0].geometry.coordinates = arc;
 
-// Used to increment the value of the point measurement against the route.
-    var counter = 0;
+    // Used to increment the value of the point measurement against the route.
+    let counter = 0;
 
     map.on('load', function () {
-// Add a source and layer displaying a point which will be animated in a circle.
+      // Add a source and layer displaying a point which will be animated in a circle.
       map.addSource('route', {
         'type': 'geojson',
         'data': route
@@ -94,6 +96,11 @@ export default {
       map.addSource('point', {
         'type': 'geojson',
         'data': point
+      });
+
+      map.addSource('airports', {
+        'type': 'geojson',
+        'data': 'https://raw.githubusercontent.com/KonstantinBiryukov/KonstantinBiryukov.github.io/master/storytellingmaps-geojson/LAXMoscow.geojson'
       });
 
       map.addLayer({
@@ -111,7 +118,7 @@ export default {
         'source': 'point',
         'type': 'symbol',
         'layout': {
-          'icon-image': 'airport-15',
+          'icon-image': 'airfield-15',
           'icon-rotate': ['get', 'bearing'],
           'icon-rotation-alignment': 'map',
           'icon-allow-overlap': true,
@@ -119,34 +126,55 @@ export default {
         }
       });
 
+      map.addLayer({
+        'id': 'airports',
+        'type': 'symbol',
+        'source': 'airports',
+        'layout': {
+          'icon-image': 'airfield-15',
+          'text-field': [
+            'format',
+            ['upcase', ['get', 'FacilityName']],
+            { 'font-scale': 0.85 },
+            '\n',
+            {},
+            ['upcase', ['get', 'Comments']],
+            { 'font-scale': 0.6 }
+          ],
+          'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+          'text-offset': [0, 0.6],
+          'text-anchor': 'top'
+        }
+      });
+
       function animate() {
-        var start =
+        let start =
             route.features[0].geometry.coordinates[
                 counter >= steps ? counter - 1 : counter
                 ];
-        var end =
+        let end =
             route.features[0].geometry.coordinates[
                 counter >= steps ? counter : counter + 1
                 ];
         if (!start || !end) return;
 
-// Update point geometry to a new position based on counter denoting
-// the index to access the arc
+        // Update point geometry to a new position based on counter denoting
+        // the index to access the arc
         point.features[0].geometry.coordinates =
             route.features[0].geometry.coordinates[counter];
 
-// Calculate the bearing to ensure the icon is rotated to match the route arc
-// The bearing is calculated between the current point and the next point, except
-// at the end of the arc, which uses the previous point and the current point
+        // Calculate the bearing to ensure the icon is rotated to match the route arc
+        // The bearing is calculated between the current point and the next point, except
+        // at the end of the arc, which uses the previous point and the current point
         point.features[0].properties.bearing = turf.bearing(
             turf.point(start),
             turf.point(end)
         );
 
-// Update the source with this new data
+        // Update the source with this new data
         map.getSource('point').setData(point);
 
-// Request the next frame of animation as long as the end has not been reached
+        // Request the next frame of animation as long as the end has not been reached
         if (counter < steps) {
           requestAnimationFrame(animate);
         }
@@ -157,39 +185,35 @@ export default {
       document
           .getElementById('replay')
           .addEventListener('click', function () {
-// Set the coordinates of the original point back to origin
+            // Set the coordinates of the original point back to origin
             point.features[0].geometry.coordinates = origin;
 
-// Update the source layer
+            // Update the source layer
             map.getSource('point').setData(point);
 
-// Reset the counter
+            // Reset the counter
             counter = 0;
 
-// Restart the animation
+          // Restart the animation
             animate(counter);
           });
 
-// Start the animation
+      // Start the animation
       animate(counter);
+
+      // popup helper with description
+      new mapboxgl.Popup({closeOnClick: false, anchor: "center"})
+          .setLngLat([-159.1437881976649, 66.13508298542861])
+          .setHTML('<div id="alongRoute-helper" class="popup-helper">' +
+               'A point is animated along the route.<br>' +
+               'Push "Replay" button to repeat the plane\'s animation.</div>')
+          .addTo(map);
     });
   }
 }
 </script>
 
 <style scoped>
-body {
-  margin: 0;
-  padding: 0;
-}
-
-#map {
-  position: fixed;
-  width: 99%;
-  top: 20%;
-  bottom: 1%;
-}
-
 .overlay {
   position: absolute;
   top: 22%;
@@ -211,5 +235,4 @@ body {
 .overlay button:hover {
   background-color: red;
 }
-
 </style>

@@ -14,7 +14,7 @@ export default {
   name: "PathFollow",
   data: function () {
     return {
-      style: 'mapbox://styles/mapbox-map-design/ckhqrbxlc1awj19svtb92m0bd',
+      style: 'mapbox://styles/mapbox/streets-v11',
     }
   },
   computed: {
@@ -80,7 +80,7 @@ export default {
         source: 'trace',
         id: 'line',
         paint: {
-          'line-color': 'orange',
+          'line-color': 'red',
           'line-width': 5
         },
         layout: {
@@ -105,7 +105,7 @@ export default {
       function frame(time) {
         if (!start) start = time;
 // phase determines how far through the animation we are
-        var phase = (time - start) / animationDuration;
+        let phase = (time - start) / animationDuration;
 
 // phase is normalized between 0 and 1
 // when the animation is finished, reset start to loop the animation
@@ -113,22 +113,22 @@ export default {
 // wait 1.5 seconds before looping
           setTimeout(function () {
             start = 0.0;
-          }, 1500);
+          }, 2000);
         }
 
 // use the phase to get a point that is the appropriate distance along the route
 // this approach syncs the camera and route positions ensuring they move
 // at roughly equal rates even if they don't contain the same number of points
-        var alongRoute = turf.along(
+        let alongRoute = turf.along(
             turf.lineString(targetRoute),
             routeDistance * phase
         ).geometry.coordinates;
 
-        var alongCamera = turf.along(
+        let alongCamera = turf.along(
             turf.lineString(cameraRoute),
             cameraRouteDistance * phase
         ).geometry.coordinates;
-        var camera = map.getFreeCameraOptions();
+        let camera = map.getFreeCameraOptions();
 
 // set the position and altitude of the camera
         camera.position = mapboxgl.MercatorCoordinate.fromLngLat(
@@ -151,6 +151,14 @@ export default {
       }
 
       window.requestAnimationFrame(frame);
+
+      // popup helper with description
+      new mapboxgl.Popup({closeOnClick: false, anchor: "center"})
+          .setLngLat([ 6.610342272663989, 46.04037546190009])
+          .setHTML('<div id="animation-helper" class="popup-helper">' +
+              'The path is pre-rendered and the camera just follows the route.' +
+              '</div>')
+          .addTo(map);
     });
 
   }
@@ -158,15 +166,4 @@ export default {
 </script>
 
 <style scoped>
-body {
-  margin: 0;
-  padding: 0;
-}
-
-#map {
-  position: fixed;
-  width: 99%;
-  top: 20%;
-  bottom: 1%;
-}
 </style>

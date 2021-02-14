@@ -24,7 +24,7 @@ const store = createStore({
             {
                 id: 2,
                 name: "Interactive dynamic maps",
-                image: "logo.png",
+                image: "interactive-maps.png",
                 description: "test2",
                 component: "OnScrollClass",
                 routePath: "/class/interactiveMap",
@@ -32,7 +32,7 @@ const store = createStore({
                     {
                         id: 2.1,
                         name: "Fly to a Location",
-                        image: "logo.png",
+                        image: "fly-to.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/flyto/",
                         component: "FlyToLocation",
                         routePath: "/class/interactiveMap/flyToLocation"
@@ -40,7 +40,7 @@ const store = createStore({
                     {
                         id: 2.2,
                         name: "Changes over time",
-                        image: "logo.png",
+                        image: "time-changes.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/adjust-layer-opacity/",
                         component: "ChangesOverTime",
                         routePath: "/class/interactiveMap/changesOverTime"
@@ -48,7 +48,7 @@ const store = createStore({
                     {
                         id: 2.3,
                         name: "Control by sound",
-                        image: "logo.png",
+                        image: "sound-control.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/dancing-buildings/",
                         component: "ControlBySound",
                         routePath: "/class/interactiveMap/controlBySound"
@@ -56,7 +56,7 @@ const store = createStore({
                     {
                         id: 2.4,
                         name: "Video",
-                        image: "logo.png",
+                        image: "video.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/video-on-a-map/",
                         component: "VideoClass",
                         routePath: "/class/interactiveMap/video"
@@ -64,7 +64,7 @@ const store = createStore({
                     {
                         id: 2.5,
                         name: "Animation",
-                        image: "logo.png",
+                        image: "animation.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/free-camera-point/",
                         component: "Animation",
                         routePath: "/class/interactiveMap/animation"
@@ -72,7 +72,7 @@ const store = createStore({
                     {
                         id: 2.6,
                         name: "Slideshow",
-                        image: "logo.png",
+                        image: "slideshow.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/playback-locations/",
                         component: "Slideshow",
                         routePath: "/class/interactiveMap/slideshow"
@@ -80,7 +80,7 @@ const store = createStore({
                     {
                         id: 2.7,
                         name: "3D Polygons",
-                        image: "logo.png",
+                        image: "3d-polygons.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/3d-extrusion-floorplan/ " +
                             "https://studio.mapbox.com/datasets/ " +
                             "https://gist.github.com/ryanbaumann/a7d970386ce59d11c16278b90dde094d",
@@ -89,8 +89,8 @@ const store = createStore({
                     },
                     {
                         id: 2.8,
-                        name: "Visual Popups",
-                        image: "logo.png",
+                        name: "Markers & Popups",
+                        image: "markers-and-popups.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/3d-buildings/",
                         component: "VisualPopups",
                         routePath: "/class/interactiveMap/visualPopups"
@@ -100,7 +100,7 @@ const store = createStore({
             {
                 id: 3,
                 name: "Path visualization",
-                image: "logo.png",
+                image: "path-visualization.png",
                 description: "test3",
                 component: "OnScrollClass",
                 routePath: "/class/pathVisualization",
@@ -108,7 +108,7 @@ const store = createStore({
                     {
                         id: 3.1,
                         name: "Path following",
-                        image: "logo.png",
+                        image: "path-follow.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/free-camera-path/",
                         component: "PathFollow",
                         routePath: "/class/pathVisualization/pathFollow"
@@ -116,7 +116,7 @@ const store = createStore({
                     {
                         id: 3.2,
                         name: "Real-time route render",
-                        image: "logo.png",
+                        image: "path-render.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/live-update-feature/",
                         component: "RealTimeRouteRender",
                         routePath: "/class/pathVisualization/realTimeRouteRender"
@@ -124,7 +124,7 @@ const store = createStore({
                     {
                         id: 3.3,
                         name: "The object path along the route",
-                        image: "logo.png",
+                        image: "object-path.png",
                         description: "https://docs.mapbox.com/mapbox-gl-js/example/animate-point-along-route/",
                         component: "ObjectPathAlongRoute",
                         routePath: "/class/pathVisualization/pathAlongRoute"

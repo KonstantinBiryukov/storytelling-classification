@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import mapboxgl from "mapbox-gl";
 import store from "@/store/store";
 
 export default {
@@ -22,6 +21,7 @@ export default {
   },
   mounted() {
     let map = this.map;
+    let mapboxgl = store.store.state.mapboxgl;
     // add terrain and sky layers once the style has loaded
     map.on('load', function () {
       map.addSource('mapbox-dem', {
@@ -141,7 +141,6 @@ export default {
         .setHTML('<div id="animation-helper" class="popup-helper">Cinematographic animation with 3D terrain.<br/><br/>' +
             'Location: Crater Lake, Wizard Island, Oregon, USA.</div>')
         .addTo(map);
-
   }
 }
 
