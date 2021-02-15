@@ -1,5 +1,5 @@
 import Home from "../views/Home.vue";
-import {createWebHistory, createRouter} from "vue-router";
+import {createWebHashHistory, createRouter} from "vue-router";
 
 const routes = [
     {
@@ -86,7 +86,7 @@ const router = createRouter({
     // history.pushState API to achieve URL navigation without a page reload. In our router.js file we just need to add mode:"history"
     // and URL will look normal.
     // mode: "history",
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     // 1) we are able to change the default class names that are defined by Vue logic
     // for example 'router-link-exact-active' for an active(chosen) link.
     // 2) in router.js add the name of the class you would like to use to the linkExactActiveClass property.
