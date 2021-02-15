@@ -21,7 +21,7 @@ export default {
   },
   mounted() {
     let map = this.map;
-    let mapboxgl = store.store.state.mapboxgl;
+    let mapboxgl = store.state.mapboxgl;
     // add terrain and sky layers once the style has loaded
     map.on('load', function () {
       map.addSource('mapbox-dem', {

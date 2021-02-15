@@ -1,112 +1,55 @@
 <template>
   <div id="map"></div>
-  <div id="marker-disney"></div>
-  <div id="marker-broad"></div>
-  <div id="marker-usbank"></div>
-  <div id="marker-station"></div>
-  <div id="marker-bradbury"></div>
-<!--  <div class="marker" v-for="location in locations" :key="location.id">-->
-<!--    <div id="'marker-' + location.name"></div>-->
-<!--  </div>-->
+  <div class="places" v-for="place in storyLA.places" :key="place.id">
+    <div v-bind:id="'marker-' + place.name"></div>
+  </div>
 </template>
 
 <script>
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 import store from "@/store/store";
+import {storyLA} from "@/store/LAstoryStore";
 
 export default {
   name: "VisualPopups",
   data: function () {
     return {
       style: 'mapbox://styles/mapbox/streets-v11',
-      // locations: [
-      //   {"id": 1, name: "disney", text: "Walt Disney Concert Hall"},
-      //   {"id": 2, name: "broad", text: "Broad Museum"},
-      // ]
+      storyLA: storyLA
     }
   },
   computed: {
     map() {
       return store.getters.createMap("map", 45, 25, 13,
           [-118.2592335, 34.0451156], this.style, 9, true
-      );  // map, 40, 55, 15.5    [-77.03997455029825, 38.90857732121413]
-
+      );
     }
   },
   mounted() {
     let map = this.map;
-    let disneyCoord = [-118.24988946244828, 34.055455864645864];
-    let broadCoord = [-118.25063315715954, 34.05440489632599];
-    let towerCoord = [-118.25440582456434, 34.05106600482056];
-    let stationCoord = [-118.23615334059522, 34.055807390791905];
-    let bradburyCoord = [-118.24791556567747, 34.05057280587245];
 
     map.on('load', function () {
-      let disneyPopup = new mapboxgl.Popup({offset: 25}).setText(
-          'Walt Disney Concert Hall.'
-      );
+      // create the marker, set coordinates, sets a popup on this marker and add it the marker onto the map
+      storyLA.places.forEach((place) => {
+        new mapboxgl.Marker(document.getElementById("marker-" + place.name))
+            .setLngLat(place.coordinates)
+            .setPopup(new mapboxgl.Popup({offset: 25}).setHTML(place.popupHtml))
+            .addTo(map)
+      });
 
-      let broadPopup = new mapboxgl.Popup({offset: 25}).setText(
-          'Broad Museum.'
-      );
-
-      let towerPopup = new mapboxgl.Popup({offset: 25}).setText(
-          'US Bank Tower.'
-      );
-
-      let stationPopup = new mapboxgl.Popup({offset: 25}).setText(
-          'Union Station.'
-      );
-
-      let bradburyPopup = new mapboxgl.Popup({offset: 25}).setText(
-          'Bradbury Building.'
-      );
-
-
-// create the marker
-      new mapboxgl.Marker(document.getElementById("marker-disney"))
-          .setLngLat(disneyCoord)
-          .setPopup(disneyPopup) // sets a popup on this marker
-          .addTo(map);
-
-      new mapboxgl.Marker(document.getElementById("marker-broad"))
-          .setLngLat(broadCoord)
-          .setPopup(broadPopup) // sets a popup on this marker
-          .addTo(map);
-
-      new mapboxgl.Marker(document.getElementById("marker-usbank"))
-          .setLngLat(towerCoord)
-          .setPopup(towerPopup) // sets a popup on this marker
-          .addTo(map);
-
-      new mapboxgl.Marker(document.getElementById("marker-usbank"))
-          .setLngLat(towerCoord)
-          .setPopup(towerPopup) // sets a popup on this marker
-          .addTo(map);
-
-      new mapboxgl.Marker(document.getElementById("marker-station"))
-          .setLngLat(stationCoord)
-          .setPopup(stationPopup) // sets a popup on this marker
-          .addTo(map);
-
-      new mapboxgl.Marker(document.getElementById("marker-bradbury"))
-          .setLngLat(bradburyCoord)
-          .setPopup(bradburyPopup) // sets a popup on this marker
-          .addTo(map);
-
+      // popup helper with description
       new mapboxgl.Popup({closeOnClick: false, anchor: "right"})
-          .setLngLat( [-118.2662335, 34.0651156])
-          .setHTML('<div id="polygons-helper" class="popup-helper">Markers represent the image of the location. <br>' +
-              'Click on the marker to see a name of the building and the description.<br><br> ' +
-              'Location: Los Angeles, downtown, USA.</div>')
+          .setLngLat([-118.2662335, 34.0651156])
+          .setHTML('<div id="polygons-helper" class="popup-helper">Famous buildings in <span id="downtown-la-title">Downtown Los Angeles, USA.</span> ' +
+              'A marker represents the image of the building. <br>' +
+              'Click on the marker to take a look at the name of the building and the description.</div>')
           .addTo(map);
-
     });
   }
 }
 </script>
 
-<style >
+<style>
 #marker-disney {
   background-image: url('https://offloadmedia.feverup.com/secretlosangeles.com/wp-content/uploads/2020/01/22094750/shutterstock_426455206.jpg');
   background-size: cover;
@@ -152,20 +95,47 @@ export default {
   cursor: pointer;
 }
 
+#marker-cityhall {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/2f/Los_Angeles_City_Hall_2013.jpg');
+  background-size: cover;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#marker-microsoft {
+  background-image: url('https://s3-us-west-1.amazonaws.com/goldenvoice-com/wp-content/uploads/2015/10/26182500/microsoft5_678.jpg');
+  background-size: cover;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#marker-cathedral {
+  background-image: url('https://files.structurae.net/files/350high/1480/our_lady_angels04.jpg');
+  background-size: cover;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  cursor: pointer;
+}
 
 .mapboxgl-popup {
   max-width: 200px;
 }
 
-body {
-  margin: 0;
-  padding: 0;
+.popup-image {
+  width: 200px;
 }
 
-#map {
-  position: fixed;
-  width: 99%;
-  top: 20%;
-  bottom: 1%;
+.popup-title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#downtown-la-title{
+  color: red;
 }
 </style>

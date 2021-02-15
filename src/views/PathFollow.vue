@@ -22,9 +22,6 @@ export default {
       return store.getters.createMap("map", -180, 65, 11.53,
           [6.5615, 46.0598], this.style, 9.5, false
       );
-    },
-    routes() {
-      return routes;
     }
   },
   mounted() {
@@ -37,9 +34,6 @@ export default {
 //   ...
 // ]
 // this is the path the camera will look at
-
-    let routes = this.routes;
-
     var targetRoute = routes.target;
 // this is the path the camera will move along
     var cameraRoute = routes.camera;
@@ -154,7 +148,7 @@ export default {
 
       // popup helper with description
       new mapboxgl.Popup({closeOnClick: false, anchor: "center"})
-          .setLngLat([ 6.610342272663989, 46.04037546190009])
+          .setLngLat([6.610342272663989, 46.04037546190009])
           .setHTML('<div id="animation-helper" class="popup-helper">' +
               'The path is pre-rendered and the camera just follows the route.' +
               '</div>')

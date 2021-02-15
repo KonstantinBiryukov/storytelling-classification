@@ -64,7 +64,7 @@ export default {
           .setHTML('<div id="fly-helper" class="popup-helper">' +
               'The 10 most populous cities of the United States in 2020. ' +
               'Population is approximate and represented in Millions of people (in parenthesis). ' +
-              'Click on city to fly to the specific location.</div>')
+              'Click on a city in the left menu to fly to the specific location.</div>')
           .addTo(map);
 
     });
