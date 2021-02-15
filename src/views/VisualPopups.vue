@@ -8,7 +8,7 @@
 <script>
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 import store from "@/store/store";
-import {storyLA} from "@/store/LAstoryStore";
+import {storyLA} from "@/assets/LAstoryStore";
 
 export default {
   name: "VisualPopups",
