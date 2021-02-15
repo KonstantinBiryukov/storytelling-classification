@@ -3,7 +3,7 @@ import {createWebHashHistory, createRouter} from "vue-router";
 
 const routes = [
     {
-        path: "/storytelling-classification/", // url, the base url in this case
+        path: "/", // url, the base url in this case
         name: "Home", // the name of the root
         component: Home // A component the name refers to. We reported it above.
     },

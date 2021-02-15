@@ -8,7 +8,7 @@
     <div id="main-nav-container">
       <ul class="nav-links">
         <li class="links">
-          <router-link to="/storytelling-classification/">
+          <router-link to="/">
             Home
           </router-link>
         </li>
