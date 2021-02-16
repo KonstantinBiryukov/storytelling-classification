@@ -28,11 +28,10 @@
 
 <script>
 import store from '@/store/store';
-import HelperCheckbox from '@/components/HelperCheckbox'
-
+// import HelperCheckbox from '@/components/HelperCheckbox'
 export default {
   name: 'MainPage',
-  components: {HelperCheckbox},
+  // components: {HelperCheckbox},
   data() {
     return {
       classes: store.state.classes,
