@@ -5,12 +5,6 @@
     <div class="map-overlay">
       <h2 id="location-title"></h2>
       <p id="location-description"></p>
-<!--      <small-->
-<!--      >Text credit:-->
-<!--        <a target="_blank" href="http://www.nycgo.com/neighborhoods"-->
-<!--        >nycgo.com</a-->
-<!--        ></small-->
-<!--      >-->
     </div>
   </div>
 </template>
@@ -108,7 +102,7 @@ export default {
     ];
 
     function highlightBorough(code) {
-// Only show the polygon feature that cooresponds to `borocode` in the data
+      // Only show the polygon feature that cooresponds to `borocode` in the data
       map.setFilter('highlight', ['==', 'id', code]);
     }
 
@@ -118,45 +112,25 @@ export default {
 
       highlightBorough(locations[index].id ? locations[index].id : '');
 
-// Animate the map position based on camera properties
+      // Animate the map position based on camera properties
       map.flyTo(locations[index].camera);
 
       map.once('moveend', function () {
-// Duration the slide is on screen after interaction
+        // Duration the slide is on screen after interaction
         window.setTimeout(function () {
-// Increment index
+          // Increment index
           index = index + 1 === locations.length ? 0 : index + 1;
           playback(index);
         }, 5000); // After callback, show the location for 3 seconds.
       });
     }
 
-// Display the last title/description first
+    // Display the last title/description first
     title.textContent = locations[locations.length - 1].title;
     description.textContent = locations[locations.length - 1].description;
 
     map.on('load', function () {
-      // map.addSource('boroughs', {
-      //   'type': 'geojson',
-      //   // 'url': 'mapbox://mapbox.8ibmsn6u'
-      //   'url': 'https://gist.githubusercontent.com/tristanwietsma/6046119/raw/f5e8654b5a811199d2f2190b3090d1c1e3488436/greatlakes.geojson'
-      // });
-      // map.addLayer(
-      //     {
-      //       'id': 'highlight',
-      //       'type': 'fill',
-      //       'source': 'boroughs',
-      //       // 'source-layer': 'original',
-      //       'paint': {
-      //         'fill-color': '#fd6b50',
-      //         'fill-opacity': 0.25
-      //       },
-      //       // 'filter': ['==', 'id', '']
-      //     },
-      //     // 'settlement-subdivision-label'
-      // ); // Place polygon under the neighborhood labels.
-
-// Start the playback animation for each borough
+      // Start the playback animation for each lake
       playback(0);
     });
 
@@ -165,18 +139,6 @@ export default {
 </script>
 
 <style scoped>
-body {
-  margin: 0;
-  padding: 0;
-}
-
-#map {
-  position: fixed;
-  width: 99%;
-  top: 20%;
-  bottom: 1%;
-}
-
 .map-overlay-container {
   position: absolute;
   width: 25%;

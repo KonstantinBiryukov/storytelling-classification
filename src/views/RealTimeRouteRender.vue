@@ -38,11 +38,11 @@ export default {
               }
             });
 
-// setup the viewport
+          // setup the viewport
             map.jumpTo({'center': coordinates[0], 'zoom': 14});
             map.setPitch(30);
 
-// on a regular basis, add more coordinates from the saved list and update the map
+          // on a regular basis, add more coordinates from the saved list and update the map
             let i = 0;
             let timer = window.setInterval(function () {
               if (i < coordinates.length) {

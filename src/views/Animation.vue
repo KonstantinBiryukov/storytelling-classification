@@ -74,7 +74,7 @@ export default {
 
       let animations = [
         {
-          duration: 130.0,
+          duration: 80.0,
           animate: function (phase) {
             let start = [-122.1591817072966, 42.889970507106916];
             let end = [-122.14671429878624, 42.94240583812641];
@@ -106,8 +106,7 @@ export default {
 
             updateCameraPosition(position, altitude, target);
           }
-        },
-
+        }
       ];
 
       let lastTime = 0.0;
@@ -149,6 +148,6 @@ export default {
 
 <style>
 #animation-helper {
- margin: 0;
+  margin: 0;
 }
 </style>

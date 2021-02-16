@@ -21,7 +21,7 @@
           </router-link>
         </li>
       </ul>
-      <HelperCheckbox></HelperCheckbox>
+<!--      <HelperCheckbox></HelperCheckbox>-->
     </div>
   </nav>
 </template>

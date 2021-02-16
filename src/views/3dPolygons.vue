@@ -1,6 +1,5 @@
 <template>
   <div id="map"></div>
-
 </template>
 
 <script>
@@ -65,17 +64,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-body {
-  margin: 0;
-  padding: 0;
-}
-
-#map {
-  position: fixed;
-  width: 99%;
-  top: 20%;
-  bottom: 1%;
-}
-</style>
