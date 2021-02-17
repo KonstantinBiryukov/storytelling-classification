@@ -43,20 +43,18 @@ export default {
 <style scoped>
 .home {
   max-width: 1400px;
-  margin: 0 auto;
   top: 20%;
   position: absolute;
 }
 
 img {
-  /*max-width: 220px;*/
   min-width: 300px;
 }
 
 .classes {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .class {
@@ -75,5 +73,11 @@ a:visited {
 
 .homepage-photo {
   width: 250px;
+}
+
+@media screen and (max-width: 650px) {
+  .home {
+    top: 25%;
+  }
 }
 </style>

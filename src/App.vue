@@ -1,14 +1,16 @@
 <template>
-  <div id="app">
+  <!--  <div id="app">-->
+  <div id="app-container">
     <TheNavigation/>
-<!--    <router-view :key="$route.path"/>-->
-<!--    <router-view v-slot="{Component}">-->
-<!--      <transition name="fade" mode="out-in">-->
-<!--        <component :is="Component"></component>-->
-<!--      </transition>-->
-<!--    </router-view>-->
+    <!--    <router-view :key="$route.path"/>-->
+    <!--    <router-view v-slot="{Component}">-->
+    <!--      <transition name="fade" mode="out-in">-->
+    <!--        <component :is="Component"></component>-->
+    <!--      </transition>-->
+    <!--    </router-view>-->
     <router-view/>
   </div>
+  <!--  </div>-->
 </template>
 
 <script>
@@ -38,9 +40,9 @@ body {
 
 #map {
   position: fixed;
-  width: 99%;
-  top: 20%;
-  bottom: 1%;
+  width: 100%;
+  top: 15%;
+  bottom: 0;
 }
 
 .mapboxgl-popup-content {

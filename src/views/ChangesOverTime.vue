@@ -221,11 +221,13 @@ export default {
       );
       // popup helper with description
       new mapboxgl.Popup({closeOnClick: false, anchor: "center"})
-          .setLngLat([-58.918112188335495, 69.19160056082046])
+          .setLngLat([-58.918112188335495, 60.19160056082046])
           .setHTML('<div id="time-changes-helper" class="popup-helper">' +
               'The map lets the user to take a look to the locations of significant earthquakes for each month of 2021 ' +
               'and how those earthquakes are spread over the world. ' +
-              'Use a slider on the top right corner to choose a specific month. The map uses real-time data.' +
+              'Use a slider on the top right corner to choose a specific month. ' +
+              'Click on the circle to find out more information about the earthquake. <br>' +
+              'The map uses real-time data.' +
               '</div>')
           .addTo(map);
 
@@ -318,4 +320,10 @@ export default {
   text-decoration: underline;
 }
 
+@media screen and (max-width: 1050px) {
+  .map-overlay {
+    width: 30%;
+    font-size: 10px;
+  }
+}
 </style>

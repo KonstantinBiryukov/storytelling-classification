@@ -103,7 +103,7 @@ export default {
       'zoom': zoom
     });
 
-    var chapters = {
+    let chapters = {
       'st-cloud': {
         bearing: 27,
         center: [-94.1666716, 45.5558578],
@@ -140,9 +140,9 @@ export default {
 
 // On every scroll event, check which element is on screen
     window.onscroll = function () {
-      var chapterNames = Object.keys(chapters);
+      let chapterNames = Object.keys(chapters);
       for (var i = 0; i < chapterNames.length; i++) {
-        var chapterName = chapterNames[i];
+        let chapterName = chapterNames[i];
         if (isElementOnScreen(chapterName)) {
           setActiveChapter(chapterName);
           break;
@@ -150,7 +150,7 @@ export default {
       }
     };
 
-    var activeChapterName = 'st-cloud';
+    let activeChapterName = 'st-cloud';
 
     function setActiveChapter(chapterName) {
       if (chapterName === activeChapterName) return;
@@ -164,9 +164,9 @@ export default {
     }
 
     function isElementOnScreen(id) {
-      var element = document.getElementById(id);
+      let element = document.getElementById(id);
       if (element !== null) {
-        var bounds = element.getBoundingClientRect();
+        let bounds = element.getBoundingClientRect();
         return bounds.top < window.innerHeight && bounds.bottom > 300;
       }
     }
@@ -175,18 +175,14 @@ export default {
 
     // popup helper with description
     new mapboxgl.Popup({closeOnClick: false, anchor: "right"})
-        .setLngLat([ -94.09387611492849, 45.58555070865936])
+        .setLngLat([-94.09387611492849, 45.58555070865936])
         .setHTML('<div class="popup-helper">Scroll-down the page to start the story.</div>')
         .addTo(map);
-  },
-
+  }
 }
-
-
 </script>
 
 <style scoped>
-
 .section-image {
   width: 75%;
 }
@@ -194,7 +190,7 @@ export default {
 #map {
   position: fixed;
   width: 50%;
-  top: 20%;
+  top: 15%;
   bottom: 0;
 }
 
@@ -202,7 +198,6 @@ export default {
   width: 50%;
   margin-left: 50%;
   font-family: sans-serif;
-  /*overflow-y: scroll;*/
   overflow: auto;
   background-color: #fafafa;
 }

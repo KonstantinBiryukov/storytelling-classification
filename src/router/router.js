@@ -93,7 +93,7 @@ const router = createRouter({
     // then, in a file where we use it, we can change its styles with this new assigned name.
     // In the DevTools we can see that 'router-link-exact-active' is replaced by 'vue-school-active-class'.
     // Now these styles should be in the Navigation component.
-    linkExactActiveClass: "vue-school-active-class",
+    linkExactActiveClass: "nav-class-link",
     routes
 });
 

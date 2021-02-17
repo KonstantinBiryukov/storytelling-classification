@@ -46,7 +46,7 @@ img {
 .classes {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .class {
@@ -65,5 +65,11 @@ a:visited {
 
 .homepage-photo {
   width: 250px;
+}
+
+@media screen and (max-width: 650px) {
+  .home {
+    top: 25%;
+  }
 }
 </style>

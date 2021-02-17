@@ -1,6 +1,6 @@
 <template>
   <nav id="nav">
-    <h2 class="classification-title">
+    <h2 id="classification-title">
       <router-link to="/">
         Story-telling maps Classification
       </router-link>
@@ -21,7 +21,7 @@
           </router-link>
         </li>
       </ul>
-<!--      <HelperCheckbox></HelperCheckbox>-->
+      <!--      <HelperCheckbox></HelperCheckbox>-->
     </div>
   </nav>
 </template>
@@ -46,12 +46,14 @@ export default {
 #nav {
   display: flex;
   justify-content: center;
-  padding: 30px;
+  /*padding: 25px;*/
   position: fixed;
   top: 0;
   width: 100%;
   overflow: hidden;
   background: whitesmoke;
+  z-index: 100;
+  height: 15%;
 }
 
 #nav a {
@@ -62,10 +64,11 @@ export default {
 
 .nav-links {
   display: flex;
+  padding: 20px;
 }
 
 .links {
-  padding-right: 20px;
+  padding: 0 0 0 25px;
   list-style: none;
 }
 
@@ -73,23 +76,78 @@ export default {
   text-decoration: underline;
 }
 
-.logo {
-  font-size: 20px;
-  color: purple;
-  font-weight: bold;
-}
-
-h2 {
+#classification-title {
+  height: 35%;
+  margin: 15px 15px 15px 30px;
+  display: block;
+  position: relative;
+  border: solid 5px hsla(0, 55%, 35%, 1);
   border-radius: 255px 10px 225px 15px/15px 225px 15px 255px;
   padding: 0.5em;
   line-height: 1.5em;
   background: hsla(67, 95%, 95%, 1);
-  margin: 0;
 }
 
-.classification-title {
-  display: block;
-  border: solid 5px hsla(0, 55%, 35%, 1);
+#main-nav-container {
+  text-align: center;
+}
+
+@media screen and (max-width: 650px) {
+  #nav {
+    height: 20%;
+  }
+
+  #classification-title {
+    line-height: 15px !important;
+  }
+
+  .links {
+    padding: 0;
+  }
+
+  .nav-links {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links {
+    font-size: 6px;
+    line-height: 15px;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  #nav {
+    padding: 0;
+  }
+
+  #classification-title {
+    font-size: 15px;
+    height: 35%;
+    line-height: 2em;
+  }
+
+  a {
+    font-size: 14px;
+  }
+
+  .nav-links {
+    margin-top: 0;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  #classification-title {
+    height: 50%;
+    margin: 15px 15px 15px 30px;
+    line-height: 3.5em;
+  }
+
+  .nav-links {
+    padding: 50px;
+    font-size: 20px;
+  }
 }
 </style>
 

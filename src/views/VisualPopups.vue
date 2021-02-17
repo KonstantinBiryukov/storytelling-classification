@@ -138,4 +138,11 @@ export default {
 #downtown-la-title{
   color: red;
 }
+
+@media screen and (max-width: 1050px) {
+  .mapboxgl-popup-content span {
+    font-size: 10px;
+    text-space: 1px;
+  }
+}
 </style>
