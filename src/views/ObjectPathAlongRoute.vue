@@ -135,14 +135,14 @@ export default {
           'text-field': [
             'format',
             ['upcase', ['get', 'FacilityName']],
-            { 'font-scale': 0.85 },
+            { 'font-scale': 1.15 },
             '\n',
             {},
             ['upcase', ['get', 'Comments']],
-            { 'font-scale': 0.6 }
+            { 'font-scale': 0.75 }
           ],
           'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-          'text-offset': [0, 0.6],
+          'text-offset': [0, 0.8],
           'text-anchor': 'top'
         }
       });

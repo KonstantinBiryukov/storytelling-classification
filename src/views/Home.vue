@@ -42,7 +42,7 @@ export default {
 
 <style scoped>
 .home {
-  max-width: 1400px;
+  /*max-width: 1400px;*/
   top: 20%;
   position: absolute;
 }

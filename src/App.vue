@@ -56,6 +56,13 @@ body {
   margin: 5px;
 }
 
+@media screen and (min-width: 1680px) {
+  .popup-helper {
+    font-size: 17px;
+    width: 300px;
+  }
+}
+
 /*.fade-enter-from,*/
 /*.fade-leave-to {*/
 /*  opacity: 0;*/

@@ -175,4 +175,10 @@ export default {
   font-weight: bold;
   text-decoration: underline;
 }
+
+@media screen and (min-width: 1680px) {
+  #sound-helper {
+    font-size: 16px;
+  }
+}
 </style>

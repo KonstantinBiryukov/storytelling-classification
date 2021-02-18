@@ -130,19 +130,40 @@ export default {
   width: 200px;
 }
 
-.popup-title {
+span.popup-title {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 18px !important;
 }
 
-#downtown-la-title{
+#downtown-la-title {
   color: red;
 }
 
-@media screen and (max-width: 1050px) {
+.mapboxgl-popup-content span {
+  font-size: 13px;
+
+}
+
+@media screen and (min-width: 1680px) {
   .mapboxgl-popup-content span {
-    font-size: 10px;
-    text-space: 1px;
+        font-size: 15px;
+  }
+
+  .mapboxgl-marker.mapboxgl-marker-anchor-center {
+    width: 80px !important;
+    height: 80px !important;
   }
 }
+
+@media screen and (min-width: 1920px) {
+  .mapboxgl-popup-content span {
+    font-size: 17px;
+  }
+
+  .mapboxgl-marker.mapboxgl-marker-anchor-center {
+    width: 100px !important;
+    height: 100px !important;
+  }
+}
+
 </style>

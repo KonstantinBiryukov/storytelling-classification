@@ -242,6 +242,18 @@ export default {
   margin: 0;
   padding: 0;
 }
+
+@media screen and (min-width: 1680px) {
+  #time-changes-helper {
+    font-size: 15px;
+  }
+
+  .map-overlay .map-overlay-inner {
+    font-size: 17px;
+  }
+}
+
+
 </style>
 
 <style scoped>
@@ -326,4 +338,5 @@ export default {
     font-size: 10px;
   }
 }
+
 </style>

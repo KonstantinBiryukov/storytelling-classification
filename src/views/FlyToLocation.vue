@@ -50,6 +50,7 @@ export default {
       this.map.flyTo({
         center: city.coordinates,
         zoom: 10,
+        speed: 0.7,
         essential: true // this animation is considered essential with respect to prefers-reduced-motion
       })
     }
@@ -77,7 +78,7 @@ export default {
   position: fixed;
   width: 99%;
   top: 20%;
-  bottom: 1%;
+  /*bottom: 1%;*/
   overflow: auto;
 }
 
@@ -102,12 +103,25 @@ export default {
 }
 
 #title {
-  width: 23%;
+  width: 30%;
+  height: 100%;
   font-size: 12px;
   text-align: center;
   color: darkblue;
   background: darkorange;
-  padding-bottom: 20px;
+}
+
+@media screen and (min-width: 1680px) {
+  #title {
+    font-size: 16px;
+  }
+
+  .fly {
+    font-size: 18px;
+    margin: 15px 15px;
+    height: 50px;
+
+  }
 }
 
 </style>

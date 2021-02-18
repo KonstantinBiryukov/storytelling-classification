@@ -121,7 +121,7 @@ export default {
           // Increment index
           index = index + 1 === locations.length ? 0 : index + 1;
           playback(index);
-        }, 5000); // After callback, show the location for 3 seconds.
+        }, 8000); // After callback, show the location for 3 seconds.
       });
     }
 

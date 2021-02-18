@@ -33,7 +33,7 @@ export default {
 
 <style scoped>
 .home {
-  max-width: 1400px;
+  /*max-width: 1400px;*/
   margin: 0 auto;
   top: 20%;
   position: absolute;
@@ -46,7 +46,7 @@ img {
 .classes {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  /*justify-content: space-around;*/
 }
 
 .class {
