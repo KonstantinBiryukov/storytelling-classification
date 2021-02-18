@@ -49,9 +49,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+$imageRoutePath: "https://raw.githubusercontent.com/KonstantinBiryukov/KonstantinBiryukov.github.io/master/storytellingmaps-media/popup-images-LAstory/";
+
 #marker-disney {
-  background-image: url('https://offloadmedia.feverup.com/secretlosangeles.com/wp-content/uploads/2020/01/22094750/shutterstock_426455206.jpg');
+  background-image: url($imageRoutePath + 'walt-disney-hall.jpg');
   background-size: cover;
   width: 60px;
   height: 60px;
@@ -60,7 +62,7 @@ export default {
 }
 
 #marker-broad {
-  background-image: url('https://www.thebroad.org/sites/default/files/styles/broad_program_header/public/images/Large-2.jpg?itok=4f-IqLss');
+  background-image: url($imageRoutePath + 'broad-museum.jpg');
   background-size: cover;
   width: 60px;
   height: 60px;
@@ -69,7 +71,7 @@ export default {
 }
 
 #marker-usbank {
-  background-image: url('https://cdn.vox-cdn.com/thumbor/YxTcS0zAgjyLd5znu46ITwMi-XA=/0x0:2048x1202/1820x1213/filters:focal(861x438:1187x764):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/62886709/us_bank_tower_sterling_davis.0.jpg');
+  background-image: url($imageRoutePath + 'us-bank.jpg');
   background-size: cover;
   width: 75px;
   height: 75px;
@@ -78,7 +80,7 @@ export default {
 }
 
 #marker-station {
-  background-image: url('https://www.greatamericanstations.com/wp-content/uploads/2016/09/Los-Angeles-Moser-2018.jpg');
+  background-image: url($imageRoutePath + 'union-station.jpg');
   background-size: cover;
   width: 75px;
   height: 75px;
@@ -87,7 +89,7 @@ export default {
 }
 
 #marker-bradbury {
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bradbury_Building%2C_interior%2C_ironwork.jpg/305px-Bradbury_Building%2C_interior%2C_ironwork.jpg');
+  background-image: url($imageRoutePath + 'bradbury-building.jpg');
   background-size: cover;
   width: 65px;
   height: 65px;
@@ -96,7 +98,7 @@ export default {
 }
 
 #marker-cityhall {
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/2f/Los_Angeles_City_Hall_2013.jpg');
+  background-image: url($imageRoutePath + 'city-hall.jpg');
   background-size: cover;
   width: 65px;
   height: 65px;
@@ -105,7 +107,7 @@ export default {
 }
 
 #marker-microsoft {
-  background-image: url('https://s3-us-west-1.amazonaws.com/goldenvoice-com/wp-content/uploads/2015/10/26182500/microsoft5_678.jpg');
+  background-image: url($imageRoutePath + 'microsoft-theater.jpg');
   background-size: cover;
   width: 65px;
   height: 65px;
@@ -114,10 +116,19 @@ export default {
 }
 
 #marker-cathedral {
-  background-image: url('https://files.structurae.net/files/350high/1480/our_lady_angels04.jpg');
+  background-image: url($imageRoutePath + 'lady-angeles.jpg');
   background-size: cover;
   width: 65px;
   height: 65px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#marker-bookstore {
+  background-image: url($imageRoutePath + 'last-bookstore.jpg');
+  background-size: cover;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -153,6 +164,14 @@ span.popup-title {
     width: 80px !important;
     height: 80px !important;
   }
+
+  .popup-image {
+    width: 300px;
+  }
+
+  .mapboxgl-popup {
+    max-width: 350px !important;
+  }
 }
 
 @media screen and (min-width: 1920px) {
@@ -163,6 +182,14 @@ span.popup-title {
   .mapboxgl-marker.mapboxgl-marker-anchor-center {
     width: 100px !important;
     height: 100px !important;
+  }
+
+  .popup-image {
+    width: 350px;
+  }
+
+  .mapboxgl-popup {
+    max-width: 400px !important;
   }
 }
 
