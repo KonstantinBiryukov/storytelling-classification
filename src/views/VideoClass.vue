@@ -63,6 +63,7 @@ export default {
     },
   },
   mounted() {
+    store.getters.pageReload();
     let mapboxgl = store.state.mapboxgl;
     this.map.setMaxZoom(15.1);
     let map = this.map;

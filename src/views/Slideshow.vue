@@ -28,6 +28,7 @@ export default {
     }
   },
   mounted() {
+    store.getters.pageReload();
     let map = this.map;
     var title = document.getElementById('location-title');
     var description = document.getElementById('location-description');
@@ -121,7 +122,7 @@ export default {
           // Increment index
           index = index + 1 === locations.length ? 0 : index + 1;
           playback(index);
-        }, 8000); // After callback, show the location for 3 seconds.
+        }, 7000); // After callback, show the location for 3 seconds.
       });
     }
 

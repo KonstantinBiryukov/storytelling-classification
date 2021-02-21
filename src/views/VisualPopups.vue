@@ -26,6 +26,7 @@ export default {
     }
   },
   mounted() {
+    store.getters.pageReload();
     let map = this.map;
 
     map.on('load', function () {

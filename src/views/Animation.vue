@@ -20,6 +20,7 @@ export default {
     }
   },
   mounted() {
+    store.getters.pageReload();
     let map = this.map;
     let mapboxgl = store.state.mapboxgl;
     // add terrain and sky layers once the style has loaded

@@ -92,6 +92,7 @@ export default {
     }
   },
   mounted() {
+    store.getters.pageReload();
     // set up bounds and center
     const center = [-94.1666716, 45.5558578];
     const zoom = 12;

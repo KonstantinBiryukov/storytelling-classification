@@ -25,6 +25,7 @@ export default {
     }
   },
   mounted() {
+    store.getters.pageReload();
     let map = this.map;
     let mapboxgl = store.state.mapboxgl;
 

@@ -23,6 +23,7 @@ export default {
     }
   },
   mounted() {
+    store.getters.pageReload();
     let map = this.map;
 
     this.map.flyTo({

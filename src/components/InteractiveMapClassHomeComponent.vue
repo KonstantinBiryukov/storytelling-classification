@@ -2,14 +2,14 @@
   <div class="home">
     <div class="classes">
       <div class="class" v-for="classMap in subclasses" :key="classMap.id">
-          <router-link :to="classMap.routePath">
+        <router-link :to="classMap.routePath">
           <h2>
             {{ classMap.id + ". " + classMap.name }}
           </h2>
         </router-link>
         <figure>
           <router-link :to="classMap.routePath">
-          <img class="homepage-photo" :src="require(`@/assets/homepage-photos/${classMap.image}`)"
+            <img class="homepage-photo" :src="require(`@/assets/homepage-photos/${classMap.image}`)"
                  :alt="classMap.name">
           </router-link>
         </figure>

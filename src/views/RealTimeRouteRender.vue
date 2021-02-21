@@ -9,6 +9,7 @@ import mapboxgl from "mapbox-gl";
 export default {
   name: "RealTimeRouteRender",
   mounted() {
+    store.getters.pageReload();
     let map = store.getters.d3Map();
     map.on('load', function () {
       // We use D3 to fetch the JSON here so that we can parse and use it separately

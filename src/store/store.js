@@ -164,9 +164,23 @@ const store = createStore({
             return store.getters.createMap("map", 0, 55, 15,
                 [-122.019807, 45.632433], "mapbox://styles/mapbox/satellite-v9", 12);
         },
+        pageReload: () => () => {
+            // The last "domLoading" Time
+            let currentDocumentTimestamp =
+                new Date(performance.timing.domLoading).getTime();
+            // Current Time
+            let now = Date.now();
+            // Ten Seconds
+            let tenSec = 10 * 1000;
+            // Plus Ten Seconds
+            let plusTenSec = currentDocumentTimestamp + tenSec;
+            if (now > plusTenSec) {
+                location.reload();
+            }
+        }
     },
     watch: {
-        '$store.state.helpMode': function (){
+        '$store.state.helpMode': function () {
             console.log(this.$store.state.helpMode)
         }
     }

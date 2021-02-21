@@ -25,6 +25,7 @@ export default {
     }
   },
   mounted() {
+    store.getters.pageReload();
 // `routes` comes from https://docs.mapbox.com/mapbox-gl-js/assets/routes.js,
 // which has properties that are in the shape of an array of arrays that correspond
 //  to the `coordinates` property of a GeoJSON linestring, for example:
