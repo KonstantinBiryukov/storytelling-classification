@@ -164,6 +164,7 @@ const store = createStore({
             return store.getters.createMap("map", 0, 55, 15,
                 [-122.019807, 45.632433], "mapbox://styles/mapbox/satellite-v9", 12);
         },
+        // reload page if previous page was loaded 10 seconds later; for optimization purposes
         pageReload: () => () => {
             // The last "domLoading" Time
             let currentDocumentTimestamp =
