@@ -1,4 +1,9 @@
 # storytelling_classification
+Master Thesis:
+https://repository.stcloudstate.edu/gp_etds/10/
+
+Website: 
+https://konstantinbiryukov.github.io/storytelling-classification/
 
 ## Project setup
 ```
